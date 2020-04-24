@@ -1,0 +1,29 @@
+@import 'variable.scss';
+
+.Headline {
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:visited {
+    }
+}
+
+.DropDownButton {
+    background-color: red;
+}
+
+.DropDownContent {
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto 10%;
+    column-gap: .5rem;
+    box-sizing: border-box;
+
+    &:hover {
+        
+    }
+}
