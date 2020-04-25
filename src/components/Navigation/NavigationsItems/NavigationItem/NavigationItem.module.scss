@@ -12,12 +12,13 @@
     padding: .5rem 0;
     text-indent: .5rem;
     border-radius: 1rem;
+    transition: all 200ms ease;
 
     &:active,
     &.active,
     &:hover {
         color: $white;
-        background-color: $red;
+        background-color: $mint;
     }
 }
 
