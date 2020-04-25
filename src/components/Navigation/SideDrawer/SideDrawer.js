@@ -11,6 +11,7 @@ import web from 'assets/web.png'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function SideDrawer({ show, setShow }) {
+    const active = classes.active;
     return (
         <AnimatePresence>
             {show && (
@@ -24,8 +25,8 @@ function SideDrawer({ show, setShow }) {
                     <Background src={background} />
                     <Logo src={logo} width="15%" height="auto" />
                     <NavigationItems>
-                        <NavigationItem src={trending} to="/" exact>Trending</NavigationItem>
-                        <NavigationItem src={web} to="/web-dev">Web development</NavigationItem>
+                        <NavigationItem active={active} src={trending} to="/" exact>Trending</NavigationItem>
+                        <NavigationItem active={active} src={web} to="/web-dev">Web development</NavigationItem>
                     </NavigationItems>
                 </motion.div>
             )}
