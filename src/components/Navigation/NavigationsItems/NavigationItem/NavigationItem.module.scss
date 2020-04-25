@@ -1,0 +1,26 @@
+@import "variable.scss";
+
+.NavigationItem {
+    display: flex;
+    align-items: center;
+}
+
+.NavLink {
+    text-decoration: none;
+    color: $mint;
+    width: 15rem;
+    padding: .5rem 0;
+    text-indent: .5rem;
+    border-radius: 1rem;
+
+    &:active,
+    &.active,
+    &:hover {
+        color: $white;
+        background-color: $red;
+    }
+}
+
+.icon {
+    max-height: 100%;
+}

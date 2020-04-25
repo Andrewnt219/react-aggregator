@@ -1,16 +1,20 @@
-import React from 'react'
-import NavigationItems from 'components/Navigation/NavigationsItems/NavigationItems'
-import NavigationItem from 'components/Navigation/NavigationsItems/NavigationItem/NavigationItem'
-
+import React, { useState } from 'react'
+import Toolbar from 'components/Navigation/Toolbar/Toolbar'
+import SideDrawer from 'components/Navigation/SideDrawer/SideDrawer'
+import Backdrop from 'components/ui/Backdrop/Backdrop'
+import classes from './Layout.module.scss'
 // waiting for toolbar, hamburgerMenu
 function Layout(props) {
+    const [showSideDrawer, setShowSideDrawer] = useState(false);
+
     return (
         <>
-            <NavigationItems>
-                <NavigationItem to="/" exact>Home</NavigationItem>
-                <NavigationItem to="/news">News</NavigationItem>
-            </NavigationItems>
-            {props.children}
+            <Backdrop show={showSideDrawer} setShow={setShowSideDrawer} />
+            <SideDrawer show={showSideDrawer} setShow={setShowSideDrawer} />
+            <Toolbar hamMenuClicked={setShowSideDrawer} />
+            <main className={classes.main}>
+                {props.children}
+            </main>
         </>
     )
 }

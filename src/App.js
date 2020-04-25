@@ -10,7 +10,7 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path="/news" component={Webdev} />
+        <Route path="/web-dev" component={Webdev} />
         <Route path="/" component={Trending} />
       </Switch>
     </Layout>

@@ -1,0 +1,33 @@
+@import "variable.scss";
+$sideBar-w: 70%;
+
+.SideDrawer {
+    position: fixed;
+    width: $sideBar-w;
+    max-width: 300px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        margin-left: 2rem;
+        margin-top: 1rem;
+        display: grid;
+        row-gap: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: bolder;
+
+        li {
+            max-height: 2.5rem;
+
+            a {
+                margin-left: 1rem;
+            }
+        }
+    }
+}

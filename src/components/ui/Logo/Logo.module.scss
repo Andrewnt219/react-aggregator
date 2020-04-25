@@ -1,0 +1,28 @@
+@import 'variable.scss';
+.container {
+    width: 100%;
+    position: absolute;
+    top: 1rem;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    padding-left: 5%;
+    display: grid;
+    row-gap: 1rem;
+    z-index: 200;
+
+    .Logo {
+        width: 10%;
+        height: auto;
+        max-width: 5rem;
+    }
+
+    h1 {
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: $white;
+    }
+
+}
+
+

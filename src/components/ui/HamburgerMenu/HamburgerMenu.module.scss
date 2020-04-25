@@ -1,0 +1,16 @@
+@import 'variable.scss';
+.HamburgerMenu {
+    display: flex;
+    height: 60%;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.line {
+    border-radius: 5px;
+    height: .3rem;
+    background-color: $white;
+    width: 2rem;
+}
