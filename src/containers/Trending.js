@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import NewsCards from '../components/NewsCards/NewsCards'
-import { fetchSource, selectSources } from 'features/newsSlice'
-import { useDispatch, useSelector } from 'react-redux';
 import NewsSources from 'components/NewsSources/NewsSources';
+import useSource from 'hooks/useSource'
+import { selectSources, fetchSource, initSources } from 'features/newsSlice'
+import { useSelector, useDispatch } from 'react-redux';
 
 function Trending() {
-    // const sources = useSelector(selectSources);
+    // useSource('https://newsapi.org/v2/top-headlines?country=us');
+    const sources = useSelector(selectSources);
     const dispatch = useDispatch();
 
     useEffect(() => {
         document.title = 'Trending News'
     }, [])
 
-    // useEffect(() => {
-    //     /* the limitation of free-tier forces me to call 3 times */
-    //     dispatch(fetchSource({ domain: 'theverge.com' }));
-    //     dispatch(fetchSource({ domain: 'medium.com' }));
-    //     dispatch(fetchSource({ domain: 'smashingmagazine.com' }));
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(initSources());
+        dispatch(fetchSource({url: 'https://newsapi.org/v2/top-headlines?country=us'}));
+    }, [dispatch]);
 
     return (
         <NewsCards title="Trending">
-            <NewsSources />
+            <NewsSources sources={sources} />
         </NewsCards>
     )
 }

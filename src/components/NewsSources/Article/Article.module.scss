@@ -5,16 +5,27 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: $black;
 
     &:visited {
+        color: #ccc;
+    }
+
+    &:hover {
+        color: $red;
     }
 }
 
 .DropDownButton {
-    background-color: red;
+    background-color: inherit;
+    border: 0;
+    cursor: pointer;
 }
 
 .DropDownContent {
+    font-style: italic;
+    color: #aaa;
+    margin: 1rem 0;
 }
 
 .container {
@@ -22,6 +33,7 @@
     grid-template-columns: auto 10%;
     column-gap: .5rem;
     box-sizing: border-box;
+    border-bottom: 1px solid $mint;
 
     &:hover {
         

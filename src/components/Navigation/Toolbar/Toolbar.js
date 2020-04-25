@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import NavigationItems from '../NavigationsItems/NavigationItems'
 import HamburgerMenu from 'components/ui/HamburgerMenu/HamburgerMenu'
 import classes from './Toolbar.module.scss'
 import Logo from 'components/ui/Logo/Logo'
@@ -14,8 +13,8 @@ function Toolbar(props) {
     let toolbar = (
         <>
             <HamburgerMenu setShow={props.hamMenuClicked} />
-            <Logo />
-            <FontAwesomeIcon icon={faSearch} onClick={() => setShowSearch(true)} color="white"  />
+            <a href="/"><h1>AGGREGATOR</h1></a>
+            <FontAwesomeIcon style={{fontSize: '1.5rem'}} icon={faSearch} onClick={() => setShowSearch(true)} color="white" cursor="pointer"  />
         </>
 
     )

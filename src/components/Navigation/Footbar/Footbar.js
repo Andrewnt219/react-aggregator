@@ -1,6 +1,5 @@
 import React from 'react'
 import classes from './Footbar.module.scss'
-import NavigationItems from '../NavigationsItems/NavigationItems'
 import NavigationItem from '../NavigationsItems/NavigationItem/NavigationItem'
 import trend from 'assets/trend.png'
 import bookmark from 'assets/bookmark.png'

@@ -16,8 +16,13 @@
     a {
         width: min-content;
         padding: 0;
-
+        text-decoration: none;
         position: static;
+    }
+
+    h1 {
+        color: $white;
+
     }
 }
 
