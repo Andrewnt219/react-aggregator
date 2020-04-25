@@ -38,12 +38,6 @@ $sideBar-w: 70%;
                 &:hover {
                     color: $red;
                 }
-
-                &.active {
-                    &::before {
-                        content: "✨";
-                    }
-                }
             }
         }
     }
