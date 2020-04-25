@@ -11,6 +11,14 @@
     background-color: $red;
     align-items: center;
     padding: 0 1rem;
+    box-sizing: border-box;
+
+    a {
+        width: min-content;
+        padding: 0;
+
+        position: static;
+    }
 }
 
 .nav {
