@@ -1,37 +1,26 @@
 import React, { useEffect } from 'react'
 import NewsCards from '../components/NewsCards/NewsCards'
 import useSource from 'hooks/useSource'
+import useTitle from 'hooks/useTitle'
 import NewsSources from 'components/NewsSources/NewsSources';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectSources, fetchSource, initSources } from 'features/newsSlice';
+import withErrorHandler from 'hoc/withErrorHander'
+
+const URLS = [
+    'https://newsapi.org/v2/everything?domains=theverge.com',
+    'https://newsapi.org/v2/everything?domains=medium.com',
+    'https://newsapi.org/v2/everything?domains=smashingmagazine.com'
+]
+const TITLE = 'Web Development';
 
 function Webdev() {
-    const dispatch = useDispatch();
-
-    // useSource(dispatch,
-    //     'https://newsapi.org/v2/everything?domains=theverge.com',
-    //     'https://newsapi.org/v2/everything?domains=medium.com',
-    //     'https://newsapi.org/v2/everything?domains=smashingmagazine.com'
-    // );
-
-    useEffect(() => {
-        document.title = 'Webdev'
-    }, [])
-
-    useEffect(() => {
-        dispatch(initSources());
-        dispatch(fetchSource({url: 'https://newsapi.org/v2/everything?domains=theverge.com'}));
-        dispatch(fetchSource({url: 'https://newsapi.org/v2/everything?domains=medium.com'}));
-        dispatch(fetchSource({url: 'https://newsapi.org/v2/everything?domains=smashingmagazine.com'}));
-    }, [dispatch]);
-    
-    const sources = useSelector(selectSources)
+    const sources = useSource(URLS)
+    useTitle(TITLE);
 
     return (
-        <NewsCards title="Webdev">
+        <NewsCards title={TITLE}>
             <NewsSources sources={sources} />
         </NewsCards>
     )
 }
 
-export default Webdev
+export default withErrorHandler(Webdev) 

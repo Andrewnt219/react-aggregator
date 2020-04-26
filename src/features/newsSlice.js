@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {setError} from 'features/uiSlice'
 
 import axios from 'axios'
 
@@ -31,7 +32,7 @@ export const fetchSource = (payload) => async dispatch => {
         const res =  await axios.get(payload.url + appendedApiQuery);
         dispatch(updateNews({articles: res.data.articles}));
     } catch (error) {
-        console.log(error);
+        dispatch(setError({hasError: error.message}));
     }
 }
 

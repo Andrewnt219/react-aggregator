@@ -30,7 +30,7 @@
 
 .container {
     display: grid;
-    grid-template-columns: auto 10%;
+    grid-template-columns: auto 2rem 2rem;
     column-gap: .5rem;
     box-sizing: border-box;
     border-bottom: 1px solid $mint;
