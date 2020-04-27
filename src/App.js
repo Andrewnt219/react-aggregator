@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.module.scss';
 import { Switch, Route } from 'react-router-dom';
-import Webdev from './containers/Webdev'
-import Trending from './containers/Trending'
 import Layout from './hoc/Layout';
 
+const Webdev = React.lazy(() => import('./containers/Webdev'));
+const Trending = React.lazy(() => import('./containers/Trending'));
+const Auth = React.lazy(() => import('./containers/Auth'));
 
 function App() {
   return (
     <Layout>
-      <Switch>
-        <Route path="/web-dev" component={Webdev} />
-        <Route path="/" component={Trending} />
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/web-dev" component={Webdev} />
+          <Route path="/account" component={Auth} />
+          <Route path="/" component={Trending} />
+        </Switch>
+      </Suspense>
     </Layout>
   );
 }
