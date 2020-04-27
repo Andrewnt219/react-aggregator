@@ -19,8 +19,8 @@ function withHandler(Component) {
             <>
                 <Modal show={error} clicked={dismissError}>
                     {error !== false
-                        ? <h3>{error}</h3>
-                        : <h1>Something went wrong</h1>
+                        ? <h3 style={{width: 'max-content', margin: '0 auto'}}>{error}</h3>
+                        : <h1 style={{width: 'max-content', margin: '0 auto'}}>Something went wrong</h1>
                     }
                 </Modal>
                 {/* {loading && <Spinner /> } */}

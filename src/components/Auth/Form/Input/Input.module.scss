@@ -6,16 +6,19 @@
     column-gap: 1rem;
     row-gap: 0.5rem;
     align-items: center;
+    margin-bottom: 1rem;
 
     input {
         border: 1px solid $mint;
         border-radius: 2px;
-        padding: .25rem 1rem;
+        padding: .5rem 1rem;
+        font-size: 1rem;
     }
 
     label {
         color: $mint;
         font-weight: bold;
+        font-size: 1.15rem;
     }
 
     .Error {

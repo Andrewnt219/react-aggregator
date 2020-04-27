@@ -1,0 +1,32 @@
+@import 'variable.scss';
+
+.Form {
+    display: flex;
+    margin: 0 auto;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: max-content;
+    border-radius: .5rem;
+    padding: 1rem;
+    border: 2px solid $mint;
+
+    h1 {
+        margin: 0 auto 1.5rem auto;
+        color: $red;
+        text-transform: capitalize;
+    }
+
+    button {
+        margin: 1rem auto 0 auto;
+        color: $mint;
+        transition: all .3s ease;
+        padding: .5rem 1rem;
+        border-radius: 2px;
+
+        &:focus, &:hover {
+            background-color: $mint;
+            color: $white;
+        }
+    }
+}

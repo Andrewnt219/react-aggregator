@@ -3,7 +3,6 @@
 .Modal {
     width: max-content;
     max-width: 70vw;
-    min-width: 50vw;
     height: max-content;
     position: fixed;
     left: 50%;
@@ -11,7 +10,8 @@
     // transform: translate(-50%, -50%);
     background-color: $white;
     box-shadow: 0 2px 5px $black;
-    padding: 1rem;
+    padding: 1rem 3rem;
+    z-index: 999;
     cursor: pointer;
 
     p {

@@ -1,17 +1,18 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import Input from './Input/Input';
+import classes from './Form.module.scss';
+import Button from 'components/ui/Button/Button';
 
-function Form() {
+
+function Form({ title, onSubmit }) {
     const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
 
-    const onSubmit = (data) => {
-        console.log(data);
-    }
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
+            <h1>{title || 'form'}</h1>
             <Input
+                type="text"
                 name="lastName"
                 label="Last Name"
                 errors={errors}
@@ -19,6 +20,7 @@ function Form() {
                 placeholder="Last name" />
 
             <Input
+                type="text"
                 errors={errors}
                 register={register}
                 name="firstName"
@@ -27,6 +29,7 @@ function Form() {
                 label="First name" />
 
             <Input
+                type="email"
                 name="email"
                 errors={errors}
                 label="Email"
@@ -44,6 +47,7 @@ function Form() {
 
 
             <Input
+                type="password"
                 name="password"
                 label="Password"
                 errors={errors}
@@ -55,7 +59,7 @@ function Form() {
                     }
                 })} />
 
-            <input type="submit" value="Submit" />
+            <Button type="submit">SUBMIT</Button>
         </form>
     )
 }

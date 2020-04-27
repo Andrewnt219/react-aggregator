@@ -1,10 +1,13 @@
 import React from 'react'
+import classes from './Button.module.scss'
 
-function Button() {
+function Button({children, ...htmlAttrs}) {
     return (
-        <div>
-            
-        </div>
+        <button 
+
+        className={classes.Button} {...htmlAttrs}>
+            {children}
+        </button>
     )
 }
 
