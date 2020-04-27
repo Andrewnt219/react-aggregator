@@ -33,11 +33,12 @@ function Form({ title, onSubmit }) {
                 name="email"
                 errors={errors}
                 label="Email"
+                placeholder="example@ex.com"
                 register={register({
                     required: "Email is required",
                     pattern: {
                         value: /@.*\..+$/,
-                        message: "Invalid email format. E.g. example@ex.com"
+                        message: "Invalid email format"
                     },
                     minLength: {
                         value: 6,
