@@ -1,45 +1,61 @@
 import React from 'react'
-import {useForm, ErrorMessage } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import Input from './Input/Input';
 
 function Form() {
-    const {register, handleSubmit, errors } = useForm({validateCriteriaMode: "all"});
+    const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
+
     const onSubmit = (data) => {
         console.log(data);
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input ref={register} name="lastName" />
+            <Input
+                name="lastName"
+                label="Last Name"
+                errors={errors}
+                register={register}
+                placeholder="Last name" />
 
-            <input ref={register} name="firstName" />
+            <Input
+                errors={errors}
+                register={register}
+                name="firstName"
+                placeholder="First Name"
+                title="Please enter your first name"
+                label="First name" />
 
-            <input ref={register({
-                required: "Email is required",
-                pattern: {
-                    value: /@.*\..*$/,
-                    message: "Invalid email format. E.g. example@ex.com"
-                },
-                minLength: {
-                    value: 6,
-                    message: "Min length is 6"
-                }
-            })} name="email" />
-            <ErrorMessage errors={errors} name="email" >
-                {({messages}) => 
-               { console.log(messages);return messages &&
-                Object.entries(messages).map(([type, message]) => (
-                    <p key={type}>{message}</p>
-                ))} }
-            </ErrorMessage>
+            <Input
+                name="email"
+                errors={errors}
+                label="Email"
+                register={register({
+                    required: "Email is required",
+                    pattern: {
+                        value: /@.*\..+$/,
+                        message: "Invalid email format. E.g. example@ex.com"
+                    },
+                    minLength: {
+                        value: 6,
+                        message: "Min length is 6"
+                    }
+                })} />
 
-            <input ref={register({
-                required: "Password is required",
-                minLength: {
-                    value: 6,
-                    message: "Password is at lease 6 characters"
-                }
-            })} name="password" />
-            <input type="submit" value="Submit"/>
+
+            <Input
+                name="password"
+                label="Password"
+                errors={errors}
+                register={register({
+                    required: "Password is required",
+                    minLength: {
+                        value: 6,
+                        message: "Password is at least 6 characters"
+                    }
+                })} />
+
+            <input type="submit" value="Submit" />
         </form>
     )
 }
