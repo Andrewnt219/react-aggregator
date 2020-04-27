@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {setError} from 'features/uiSlice'
+import {setError, setLoading} from 'features/uiSlice'
+
 
 import axios from 'axios'
 
@@ -7,6 +8,7 @@ const newsSlice = createSlice({
     name: 'news',
     initialState: {
         sources: {},
+        loading: true
     },
 
     reducers: {
@@ -15,9 +17,13 @@ const newsSlice = createSlice({
             payload.articles.forEach((article) => {
                 if(!state.sources[article.source.name]) state.sources[article.source.name] = [];
                 state.sources[article.source.name].push(article);
-            });            
+            });
+            state.loading = false;         
         },
-        initSources: state => {state.sources = {}}
+        initSources: state => {
+            state.loading = true;
+            state.sources = {};
+        }
         
     }
 })
@@ -38,5 +44,6 @@ export const fetchSource = (payload) => async dispatch => {
 
 
 export const selectSources = state => state.news.sources;
+export const selectLoading = state => state.news.loading;
 
 export default newsSlice.reducer

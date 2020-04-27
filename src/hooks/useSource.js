@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import { selectSources, fetchSource, initSources } from 'features/newsSlice'
 import { useSelector, useDispatch } from 'react-redux';
+import { setLoading } from 'features/uiSlice';
 
 
 function useSource(urls) {
@@ -11,6 +12,8 @@ function useSource(urls) {
         dispatch(initSources());
         urls.forEach(url => dispatch(fetchSource({url})));
     }, [dispatch, urls]);
+
+
 
     return sources;
 }

@@ -17,7 +17,7 @@ function Article({ title, url, description }) {
                 className={classes.DropDownButton}
                 onClick={() => setBookmark((prevBookmark) => !prevBookmark)} 
             >
-                <FontAwesomeIcon icon={faBookmark} color={bookmark && '#e71d36'} />
+                <FontAwesomeIcon icon={faBookmark} color={bookmark ? '#e71d36' : 'initial'} />
             </button>
 
             <button
