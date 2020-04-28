@@ -6,7 +6,8 @@
     box-sizing: border-box;
     flex-direction: column;
     justify-content: space-evenly;
-    width: max-content;
+    width: 100%;
+    max-width: 30rem;
     border-radius: .5rem;
     padding: 1rem;
     border: 2px solid $mint;

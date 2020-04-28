@@ -1,16 +1,16 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import Input from './Input/Input';
-import classes from './Form.module.scss';
+import Input from '../Input/Input';
+import classes from '../Form.module.scss';
 import Button from 'components/ui/Button/Button';
 
 
-function Form({ title, onSubmit }) {
+function RegisterForm({ onSubmit }) {
     const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
-            <h1>{title || 'form'}</h1>
+            <h1>Sign Up</h1>
             <Input
                 type="text"
                 name="lastName"
@@ -65,4 +65,4 @@ function Form({ title, onSubmit }) {
     )
 }
 
-export default Form
+export default RegisterForm

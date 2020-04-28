@@ -5,7 +5,7 @@ import classes from './Input.module.scss'
 const Input = ({ errors, name, label, register, ...htmlAttrs }) => {
     return (
         <div className={classes.Input}>
-            <label htmlFor={name}>{label}</label>
+            {label && <label htmlFor={name}>{label}</label>}
             
             <input id={name} name={name} ref={register} {...htmlAttrs} />
 
