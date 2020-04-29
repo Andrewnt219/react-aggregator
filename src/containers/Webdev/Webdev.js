@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import NewsCards from '../../components/NewsCards/NewsCards'
 import useSource from 'hooks/useSource'
 import useTitle from 'hooks/useTitle'

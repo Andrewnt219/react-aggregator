@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Modal from 'components/ui/Modal/Modal'
 import { selectError, setError, /* selectLoading */ } from 'features/uiSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import Spinner from 'components/ui/Spinner/Spinner'
 
 function withHandler(Component) {
     return props => {

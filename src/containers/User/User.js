@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'components/ui/Button/Button'
 import { useDispatch } from 'react-redux'
-import { logout, selectIsLoggedIn } from 'features/authSlice'
+import { logout } from 'features/authSlice'
 
 function User() {
     const dispatch = useDispatch();

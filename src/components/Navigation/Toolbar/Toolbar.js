@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import HamburgerMenu from 'components/ui/HamburgerMenu/HamburgerMenu'
 import classes from './Toolbar.module.scss'
-import Logo from 'components/ui/Logo/Logo'
 import Search from 'components/ui/Search/Search'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'

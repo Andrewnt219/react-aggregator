@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {setError, setLoading} from 'features/uiSlice'
+import {setError} from 'features/uiSlice'
 
 
 import axios from 'axios'

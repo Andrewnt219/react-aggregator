@@ -2,8 +2,8 @@ import React, { Suspense } from 'react';
 import './App.module.scss';
 import { Switch, Route } from 'react-router-dom';
 import Layout from './hoc/Layout';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkToken, selectIsLoggedIn } from 'features/authSlice';
+import { useDispatch } from 'react-redux';
+import { checkToken } from 'features/authSlice';
 import ProtectedRoute from 'components/Auth/ProtectedRoute/ProtectedRoute';
 
 const Webdev = React.lazy(() => import('./containers/Webdev/Webdev'));
