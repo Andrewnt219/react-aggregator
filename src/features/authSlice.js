@@ -7,21 +7,24 @@ const TOKEN = 'token';
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
+        userId: null,
         isLoggedIn: false,
         loading: false
     },
     reducers: {
         setToken: (state, { payload }) => { 
             state.isLoggedIn = true;
+            state.userID = payload.data.localId;
 
             localStorage.setItem(TOKEN, JSON.stringify({
                 id: payload.data.idToken,
+                userId: payload.data.localId,
                 timeStamp: (new Date().getTime() * 1000) + payload.data.expiresIn
             }))
          },
          checkToken: (state) => {
              const token = localStorage.getItem(TOKEN);
-             
+
              if(token) {
                  JSON.parse(token);
                  if(new Date().getTime() > token.timeStamp) {
