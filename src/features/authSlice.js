@@ -89,11 +89,12 @@ export const auth = payload => async dispatch => {
             res = await axios.post(SIGNUP_URL, { email, password });
             dispatch(setToken({ data: res.data }));
 
-            // const userId = res.data.locaiId;
-            // res = await axios.post(process.env.REACT_APP_BASE_URL + '/users.json', {
-            //     ...rest,
-            //     userId: userId
-            // })
+            // Store additional user info, with userId
+            const userId = res.data.localId;
+            res = await axios.post(process.env.REACT_APP_BASE_URL + '/users.json', {
+                ...rest,
+                userId
+            })
         }
 
     } catch (error) {
