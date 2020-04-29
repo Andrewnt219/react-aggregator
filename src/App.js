@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Layout from './hoc/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkToken, selectIsLoggedIn } from 'features/authSlice';
+import ProtectedRoute from 'components/Auth/ProtectedRoute/ProtectedRoute';
 
 const Webdev = React.lazy(() => import('./containers/Webdev/Webdev'));
 const Trending = React.lazy(() => import('./containers/Trending/Trending'));
@@ -15,18 +16,13 @@ const Empty = React.lazy(() => import('./containers/Empty/Empty'));
 function App() {
   const dispatch = useDispatch();
   dispatch(checkToken());
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const authenticatedRoutes = (
-    <Switch>
-      <Route path="/me" component={User} />
-    </Switch>
-  )
   return (
     <Layout>
       <Suspense fallback={<div>Loading...</div>}>
-        {isLoggedIn && authenticatedRoutes}
+
         <Switch>
+          <ProtectedRoute path="/me" component={User} />
           <Route path="/web-dev" component={Webdev} />
           <Route path="/account" component={Auth} />
           <Route path="/" exact component={Trending} />

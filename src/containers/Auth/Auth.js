@@ -13,7 +13,7 @@ function Auth() {
     const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(true);
 
-    function onSubmit(data, isLogin) {
+    function onSubmit(data) {
         dispatch(auth({ data, isLogin }));
     }
 
