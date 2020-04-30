@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from '../Axios';
 import { setError } from "./uiSlice";
 
 /**
@@ -15,13 +15,15 @@ const authSlice = createSlice({
     initialState: {
         userId: null,
         isLoggedIn: false,
-        loading: false
+        isLoading: false
     },
     reducers: {
+        setIsLoading: (state, {payload}) => { state.isloading = payload.isLoading},
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
-            state.userID = payload.data.localId;
+            state.userId = payload.data.localId;
+            state.isLoading = false;
 
             // Store token in local storage
             localStorage.setItem(TOKEN, JSON.stringify({
@@ -34,20 +36,23 @@ const authSlice = createSlice({
         // Will be run everytime the app is RELOADED
         checkToken: (state) => {
             // Get the token
-            const token = localStorage.getItem(TOKEN);
+            const tokenJSON = localStorage.getItem(TOKEN);
 
             // Check if token exists in localStorage
-            if (token) {
-                JSON.parse(token);
+            if (tokenJSON) {
+                const token = JSON.parse(tokenJSON);
 
                 // Check if the token is expired
-                // then set loggedIn state accordingly
                 if (new Date().getTime() > token.timeStamp) {
+                    // logOut if expires
                     localStorage.removeItem(TOKEN);
                     state.isLoggedIn = false;
+                    state.userId = null;
                 }
                 else {
+                    // Auto log in if not expires
                     state.isLoggedIn = true;
+                    state.userId = token.userId;
                 }
             }
 
@@ -56,6 +61,7 @@ const authSlice = createSlice({
         logout: (state) => {
             localStorage.removeItem(TOKEN);
             state.isLoggedIn = false;
+            state.userId = null;
         }
     }
 })
@@ -63,8 +69,10 @@ const authSlice = createSlice({
 /**
  * exports
  */
-export const { setToken, checkToken, logout } = authSlice.actions;
+export const { setToken, checkToken, logout, setIsLoading } = authSlice.actions;
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;
+export const selectUserId = state => state.auth.userId;
+export const selectIsLoading = state => state.auth.isLoading;
 export default authSlice.reducer;
 
 /**
@@ -91,7 +99,7 @@ export const auth = payload => async dispatch => {
 
             // Store additional user info, with userId
             const userId = res.data.localId;
-            res = await axios.post(process.env.REACT_APP_BASE_URL + '/users.json', {
+            res = await axios.post('/users.json', {
                 ...rest,
                 userId
             })
@@ -99,7 +107,7 @@ export const auth = payload => async dispatch => {
 
     } catch (error) {
         console.log(error);
-        dispatch(setError({ hasError: error.response.data.error.message }));
+        dispatch(setError({ hasError: error?.response.data.error.message }));
     }
 }
 

@@ -4,10 +4,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp, faBookmark } from '@fortawesome/free-solid-svg-icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import classes from './Article.module.scss'
+import { selectUserId } from 'features/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { createBookmark } from 'features/bookmarkSlice'
 
 function Article({ title, url, description }) {
     const [show, setShow] = useState(false);
-    const [bookmark, setBookmark] = useState(false);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+    const userId = useSelector(selectUserId);
+    const dispatch = useDispatch();
+
+    const handleBookmark = () => {
+        dispatch(createBookmark({
+            title,
+            url,
+            description,
+            userId
+        }));
+        setIsBookmarked((previsBookmarked) => !previsBookmarked);
+    }
 
     return (
         <article className={classes.container} onMouseLeave={() => setShow(false)} >
@@ -15,9 +30,9 @@ function Article({ title, url, description }) {
 
             <button
                 className={classes.DropDownButton}
-                onClick={() => setBookmark((prevBookmark) => !prevBookmark)} 
+                onClick={handleBookmark}
             >
-                <FontAwesomeIcon icon={faBookmark} color={bookmark ? '#e71d36' : 'initial'} />
+                <FontAwesomeIcon icon={faBookmark} color={isBookmarked ? '#e71d36' : 'initial'} />
             </button>
 
             <button
@@ -25,7 +40,7 @@ function Article({ title, url, description }) {
                 onClick={() => setShow((prevShow) => !prevShow)} >
                 {show ? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />}
             </button>
-            
+
             <AnimatePresence>
                 {show && <motion.div
                     animate={{

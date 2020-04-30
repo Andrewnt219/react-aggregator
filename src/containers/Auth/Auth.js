@@ -2,23 +2,27 @@ import RegisterForm from "components/Auth/RegisterForm/RegisterForm";
 import withErrorHandler from 'hoc/withErrorHandler'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { auth, selectIsLoggedIn } from 'features/authSlice'
+import { auth, selectIsLoggedIn, selectIsLoading, setIsLoading } from 'features/authSlice'
 import LoginForm from "components/Auth/LoginForm/LoginForm";
 import classes from './Auth.module.scss'
 import { Redirect } from "react-router-dom";
+import Spinner from "components/ui/Spinner/Spinner";
 
 
 function Auth() {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(true);
+    const isLoading = useSelector(selectIsLoading);
 
     function onSubmit(data) {
+        dispatch(setIsLoading({ isLoading: true }));
         dispatch(auth({ data, isLogin }));
     }
 
     let form = (
         <>
+            {isLoading && <Spinner />}
             <LoginForm onSubmit={onSubmit} />
             <div className={classes.switchContainer}>
                 <span style={{ color: '#bbb' }}>New to Aggregator? </span>
@@ -31,6 +35,7 @@ function Auth() {
 
         form = (
             <>
+                {isLoading && <Spinner />}
                 <RegisterForm onSubmit={onSubmit} />
                 <div className={classes.switchContainer}>
                     <span style={{ color: '#bbb' }}>Already have an account? </span>
@@ -41,7 +46,7 @@ function Auth() {
         )
     }
 
-    return isLoggedIn ? <Redirect to="/me"/> : form
+    return isLoggedIn ? <Redirect to="/me" /> : form
 
 }
 

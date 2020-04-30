@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import {setError} from 'features/uiSlice'
 
 
-import axios from 'axios'
+import axios from '../Axios'
 
 const newsSlice = createSlice({
     name: 'news',
