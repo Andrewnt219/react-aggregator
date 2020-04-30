@@ -10,6 +10,7 @@ const Webdev = React.lazy(() => import('./containers/Webdev/Webdev'));
 const Trending = React.lazy(() => import('./containers/Trending/Trending'));
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 const User = React.lazy(() => import('./containers/User/User'));
+const Bookmarks = React.lazy(() => import('./containers/Bookmarks/Bookmarks'));
 const Empty = React.lazy(() => import('./containers/Empty/Empty'));
 
 
@@ -23,6 +24,8 @@ function App() {
 
         <Switch>
           <ProtectedRoute path="/me" component={User} />
+          <ProtectedRoute path="/bookmarks" component={Bookmarks} />
+
           <Route path="/web-dev" component={Webdev} />
           <Route path="/account" component={Auth} />
           <Route path="/" exact component={Trending} />
