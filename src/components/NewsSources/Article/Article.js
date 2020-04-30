@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import classes from './Article.module.scss'
 import { selectUserId } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveBookmark } from 'features/bookmarkSlice'
+import { createBookmark } from 'features/bookmarkSlice'
 
 function Article({ title, url, description }) {
     const [show, setShow] = useState(false);
@@ -15,7 +15,7 @@ function Article({ title, url, description }) {
     const dispatch = useDispatch();
 
     const handleBookmark = () => {
-        dispatch(saveBookmark({
+        dispatch(createBookmark({
             title,
             url,
             description,

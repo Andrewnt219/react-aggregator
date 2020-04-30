@@ -30,6 +30,7 @@ export const createBookmark = payload => async dispatch => {
 
     try {
         const res = await axios.post('/bookmarks.json', { ...payload });
+        console.log(res);
         dispatch(saveBookmark({bookmark: res.data}));
     } catch (error) {
         console.log(error);

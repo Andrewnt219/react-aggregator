@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBookmarks, selectBookmarks } from 'features/bookmarkSlice';
 import { selectUserId } from 'features/authSlice';
-import Article from 'components/NewsSources/Article/Article';
 import NewsSource from 'components/NewsSources/NewsSource/NewsSource';
 
 function Bookmarks() {
