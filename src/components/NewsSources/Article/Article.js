@@ -7,10 +7,10 @@ import classes from './Article.module.scss'
 import { selectUserId } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBookmark } from 'features/bookmarkSlice'
+import { bookmarkArticle } from 'features/newsSlice'
 
-function Article({ title, url, description }) {
+function Article({ title, url, description, source, articleId, isBookmarked }) {
     const [show, setShow] = useState(false);
-    const [isBookmarked, setIsBookmarked] = useState(false);
     const userId = useSelector(selectUserId);
     const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ function Article({ title, url, description }) {
             description,
             userId
         }));
-        setIsBookmarked((previsBookmarked) => !previsBookmarked);
+        dispatch(bookmarkArticle({ articleId, sourceName: source.name }));
     }
 
     return (
