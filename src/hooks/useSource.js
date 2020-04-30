@@ -12,7 +12,7 @@ function useSource(urls) {
 
     useEffect(() => {
         dispatch(initSources());
-        urls.forEach(url => dispatch(fetchSource({url})));
+        urls.forEach(url => dispatch(fetchSource({url, bookmarks})));
     }, [dispatch, urls]);
 
 
