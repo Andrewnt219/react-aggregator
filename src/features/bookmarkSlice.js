@@ -4,16 +4,16 @@ import axios from "../Axios";
 const bookmarkSlice = createSlice({
     name: 'bookmark',
     initialState: {
-        bookmarks: null
+        bookmarks: []
     },
     reducers: {
-        setBookmarks: (state, { payload }) => {
-
+        saveBookmark: (state, { payload }) => {
+            state.bookmarks.push(payload);
         }
     }
 })
 
-export const { setBookmarks } = bookmarkSlice.actions;
+export const { saveBookmark } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;
 
 
@@ -24,9 +24,19 @@ export const createBookmark = payload => async dispatch => {
 
     try {
         const res = await axios.post('/bookmarks.json', { ...payload });
+        dispatch(saveBookmark({bookmark: res.data}));
     } catch (error) {
         console.log(error);
         // dispatch(setError({ hasError: error.response.data.error.message }));
     }
+}
 
+export const getBookmarks = payload => async dispatch => {
+    const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
+    try {
+        const res = await axios.get('/bookmarks.json' + query);
+        console.log(res);
+    } catch (error) {
+        console.log(error);
+    }
 }
