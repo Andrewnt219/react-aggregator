@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp, faBookmark } from '@fortawesome/free-solid-svg-icons'
@@ -7,22 +7,24 @@ import classes from './Article.module.scss'
 import { selectUserId } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBookmark } from 'features/bookmarkSlice'
-import { bookmarkArticle } from 'features/newsSlice'
+import { setArticleBookmark } from 'features/newsSlice'
 
-function Article({ title, url, description, source, articleId, isBookmarked }) {
+function Article({ title, url, description, source, isBookmarked }) {
     const [show, setShow] = useState(false);
     const userId = useSelector(selectUserId);
     const dispatch = useDispatch();
 
-    const handleBookmark = () => {
+    const toggleBookmark = useCallback(() => {
         dispatch(createBookmark({
             title,
             url,
             description,
-            userId
+            userId,
+            isBookmarked: !isBookmarked,
+            source
         }));
-        dispatch(bookmarkArticle({ articleId, sourceName: source.name }));
-    }
+        dispatch(setArticleBookmark({ url, sourceName: source.name, isBookmarked: !isBookmarked }));
+    }, [title, url, description, userId, isBookmarked, dispatch, source ])
 
     return (
         <article className={classes.container} onMouseLeave={() => setShow(false)} >
@@ -30,7 +32,7 @@ function Article({ title, url, description, source, articleId, isBookmarked }) {
 
             <button
                 className={classes.DropDownButton}
-                onClick={handleBookmark}
+                onClick={toggleBookmark}
             >
                 <FontAwesomeIcon icon={faBookmark} color={isBookmarked ? '#e71d36' : 'initial'} />
             </button>

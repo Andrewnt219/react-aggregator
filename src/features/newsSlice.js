@@ -13,15 +13,14 @@ const newsSlice = createSlice({
 
     reducers: {
         // organize sources
-        populateSources: (state, { type, payload }) => {
-            let id = 0;
+        populateSources: (state, { payload }) => {
             payload.articles.forEach((article) => {
-                if (!state.sources[article.source.name]) state.sources[article.source.name] = [];
-                state.sources[article.source.name].push({
+                const newArticle = {
                     ...article,
-                    articleId: id++,
                     isBookmarked: false
-                });
+                }
+                if (!state.sources[article.source.name]) state.sources[article.source.name] = [];
+                state.sources[article.source.name].push(newArticle);
             });
             state.loading = false;
         },
@@ -29,17 +28,22 @@ const newsSlice = createSlice({
             state.loading = true;
             state.sources = {};
         },
-        bookmarkArticle: (state, { payload }) => {
-            const { articleId: id, sourceName } = payload;
+        setArticleBookmark: (state, { payload }) => {
+            const { url, sourceName, isBookmarked } = payload;
+            // Find the index of the article
             const articleIdx = state.sources[sourceName].findIndex(article => {
-                return article.articleId === id
+                return article.url === url
             });
-            state.sources[sourceName][articleIdx].isBookmarked = true;
+            // change isBookmarked of found article to true
+            state.sources[sourceName][articleIdx].isBookmarked = isBookmarked;
+        },
+        initLogin: state => {
+            // Try to merge fetched bookmarks to current state
         }
     }
 })
 
-export const { populateSources, initSources, bookmarkArticle } = newsSlice.actions;
+export const { populateSources, initSources, setArticleBookmark } = newsSlice.actions;
 
 
 // fetch articles from a given array of domain(s)
