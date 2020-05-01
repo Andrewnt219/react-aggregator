@@ -14,7 +14,7 @@ function Article({ id, title, url, description, source, isBookmarked }) {
     const dispatch = useDispatch();
 
     const toggleBookmark = useCallback(() => {
-        if(!isBookmarked) {
+        if (!isBookmarked) {
             dispatch(createBookmark({
                 title,
                 url,
@@ -24,7 +24,7 @@ function Article({ id, title, url, description, source, isBookmarked }) {
                 source
             }));
         } else {
-            dispatch(deleteBookmark({id}));
+            dispatch(deleteBookmark({ id }));
         }
 
     }, [title, url, description, userId, isBookmarked, dispatch, source, id])

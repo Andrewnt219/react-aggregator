@@ -6,7 +6,8 @@ import { objectToArrayObject, dispatchErrorWrapper } from "helpers/helpers";
 const bookmarkSlice = createSlice({
     name: 'bookmark',
     initialState: {
-        bookmarks: []
+        bookmarks: [],
+        isLoading: true
     },
     reducers: {
         saveBookmark: (state, { payload }) => {
@@ -18,12 +19,14 @@ const bookmarkSlice = createSlice({
         removeBookmark: (state, { payload }) => {
             const idx = state.bookmarks.findIndex(bookmark => bookmark.id === payload.id);
             state.bookmarks.splice(idx, 1);
-        }
+        },
+        setIsLoading: (state, {payload}) => {state.isLoading = payload.isLoading; }
     }
 })
 
-export const { saveBookmark, populateBookmarks, removeBookmark } = bookmarkSlice.actions;
+export const { saveBookmark, populateBookmarks, removeBookmark, setIsLoading } = bookmarkSlice.actions;
 export const selectBookmarks = state => state.bookmarks.bookmarks;
+export const selectIsLoading = state => state.bookmarks.isLoading;
 export default bookmarkSlice.reducer;
 
 
@@ -43,6 +46,7 @@ export const getBookmarks = payload => async dispatch => {
         const res = await axios.get('/bookmarks.json' + query);
         const bookmarks = objectToArrayObject(res.data);
 
+        dispatch(setIsLoading({isLoading: false}));
         dispatch(populateBookmarks(bookmarks));
     }
 

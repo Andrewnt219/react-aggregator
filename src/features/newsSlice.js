@@ -39,12 +39,12 @@ const newsSlice = createSlice({
     }
 })
 
-export const {  populateSources } = newsSlice.actions;
+export const { populateSources } = newsSlice.actions;
 
 
 // fetch articles from a given array of domain(s)
-export const fetchSources = ({bookmarks, url}) => async dispatch => {
-    const fetchDataFromAPI = async function() {
+export const fetchSources = ({ bookmarks, url }) => async dispatch => {
+    const fetchDataFromAPI = async function () {
         const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
         const res = await axios.get(url + appendedApiQuery);
 
