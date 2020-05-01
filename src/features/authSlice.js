@@ -14,11 +14,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         userId: null,
-        isLoggedIn: false,
-        isLoading: false
+        isLoggedIn: false
     },
     reducers: {
-        setIsLoading: (state, {payload}) => { state.isLoading = payload.isLoading},
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
@@ -88,7 +86,7 @@ export const auth = payload => async dispatch => {
         }
     }
 
-    asyncDispatchWrapper(sendAuthRequest, dispatch, setIsLoading);
+    asyncDispatchWrapper(sendAuthRequest, dispatch, payload.setIsLoading);
 }
 
 
