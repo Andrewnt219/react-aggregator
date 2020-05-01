@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-
 import axios from '../Axios'
 import { dispatchErrorWrapper } from 'helpers/helpers';
 
@@ -18,8 +16,6 @@ const newsSlice = createSlice({
         },
         // organize sources
         populateSources: (state, { payload }) => {
-            // initSources here to guarantee they always go together
-
             // Categorize articles by their source
             payload.articles.forEach((article) => {
                 // check if this article is bookmarked, undefined if not found

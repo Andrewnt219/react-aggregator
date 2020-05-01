@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../Axios";
-import { objectToArrayObject } from "helpers/helpers";
-import { setError } from "./uiSlice";
+import { objectToArrayObject, dispatchErrorWrapper } from "helpers/helpers";
 
 
 const bookmarkSlice = createSlice({
@@ -25,23 +24,23 @@ export default bookmarkSlice.reducer;
 
 
 export const createBookmark = payload => async dispatch => {
-    try {
+    const addBookmarkToDB = async function() {
         await axios.post('/bookmarks.json', { ...payload });
-        dispatch(saveBookmark({bookmark: payload}));
-    } catch (error) {
-        console.log(error);
-        dispatch(setError({ hasError: error.message }));
+        dispatch(saveBookmark({ bookmark: payload }));
     }
+
+    dispatchErrorWrapper(addBookmarkToDB, dispatch);
 }
 
 
 export const getBookmarks = payload => async dispatch => {
-    const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
-    try {
+    const fetchBookmarksFromDB = async function() {
+        const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
         const res = await axios.get('/bookmarks.json' + query);
         const bookmarks = objectToArrayObject(res.data);
         dispatch(populateBookmarks(bookmarks));
-    } catch (error) {
-        console.log(error);
     }
+
+    dispatchErrorWrapper(fetchBookmarksFromDB.bind(payload, dispatch), dispatch);
 }
+

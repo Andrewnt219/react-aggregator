@@ -7,7 +7,6 @@ import classes from './Article.module.scss'
 import { selectUserId } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBookmark } from 'features/bookmarkSlice'
-import { updateBookmarkedAritcleInSources } from 'features/newsSlice'
 
 function Article({ title, url, description, source, isBookmarked }) {
     const [show, setShow] = useState(false);
