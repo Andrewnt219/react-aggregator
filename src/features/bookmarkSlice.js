@@ -37,11 +37,12 @@ export const createBookmark = payload => async dispatch => {
         dispatch(saveBookmark({ bookmark: {...payload, id: res.data.name} }));
     }
 
-    asyncDispatchWrapper(addBookmarkToDB, dispatch, setIsLoading);
+    asyncDispatchWrapper(addBookmarkToDB, dispatch);
 }
 
 export const getBookmarks = payload => async dispatch => {
     const fetchBookmarksFromDB = async function () {
+        dispatch(setIsLoading({isLoading: true}));
         const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
         const res = await axios.get('/bookmarks.json' + query);
         const bookmarks = objectToArrayObject(res.data);
@@ -58,6 +59,6 @@ export const deleteBookmark = ({ id }) => async dispatch => {
         dispatch(removeBookmark(id));
     }
 
-    asyncDispatchWrapper(deleteBookmarkFromDB, dispatch, setIsLoading);
+    asyncDispatchWrapper(deleteBookmarkFromDB, dispatch);
 }
 
