@@ -10,7 +10,15 @@ export const dispatchErrorWrapper = async function(func, dispatch) {
         await func();
     } catch (error) {
         console.log(error);
-        const errorMessage = error.response ? error.response.data.error.message : error.message;
+
+        // damn, no one follows a specific structure for error object
+        let errorMessage;
+        try {
+            errorMessage = error.response.data.error.message;
+        } catch (err) {
+            errorMessage = error.message;
+        }
+
         dispatch(setError({ hasError: errorMessage }));
     }
 }

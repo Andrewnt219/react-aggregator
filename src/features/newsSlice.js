@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { setError } from 'features/uiSlice'
 
 
 import axios from '../Axios'
+import { dispatchErrorWrapper } from 'helpers/helpers';
 
 const newsSlice = createSlice({
     name: 'news',
@@ -46,14 +46,14 @@ export const { populateSources, updateBookmarkedAritcleInSources } = newsSlice.a
 
 // fetch articles from a given array of domain(s)
 export const fetchSources = ({bookmarks, url}) => async dispatch => {
-    try {
+    const fetchDataFromAPI = async function() {
         const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
         const res = await axios.get(url + appendedApiQuery);
 
         dispatch(populateSources({ articles: res.data.articles, bookmarks }));
-    } catch (error) {
-        dispatch(setError({ hasError: error.message }));
     }
+
+    dispatchErrorWrapper(fetchDataFromAPI, dispatch);
 }
 
 

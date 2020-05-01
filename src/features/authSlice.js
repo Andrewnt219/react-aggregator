@@ -79,19 +79,17 @@ export default authSlice.reducer;
  * Async actions
  */
 export const auth = payload => async dispatch => {
-    const asyncFunction = async function() {
+    const sendAuthRequest = async function() {
         const { email, password, ...rest } = payload.data;
-        // Sign in route
         if (payload.isLogin) {
             await sendLoginRequest(dispatch, email, password);
         }
-        // Sign up route
         else {
             await sendSignupRequest(email, password, dispatch, rest);
         }
     }
     
-    dispatchErrorWrapper(asyncFunction, dispatch);
+    dispatchErrorWrapper(sendAuthRequest, dispatch);
 }
 
 
