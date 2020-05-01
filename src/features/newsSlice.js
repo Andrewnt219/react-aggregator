@@ -21,16 +21,14 @@ const newsSlice = createSlice({
             payload.articles.forEach((article) => {
                 // check if this article is bookmarked, undefined if not found
                 const found = payload.bookmarks.find(bookmark => {
-                    console.log(bookmark.url, article.url, bookmark.url === article.url )
                     return bookmark.url === article.url;
                 });
+
                 const newArticle = {
                     ...article,
                     // Eval found bookmark to boolean
                     isBookmarked: Boolean(found)
                 }
-
-                found && console.log(newArticle);
 
                 // Init sources' property to an array if have not yet
                 if (!state.sources[article.source.name]) state.sources[article.source.name] = [];
@@ -39,15 +37,6 @@ const newsSlice = createSlice({
             });
 
             state.loading = false;
-        },
-        updateBookmarkedAritcleInSources: (state, { payload }) => {
-            const { url, sourceName, isBookmarked } = payload;
-            // Find the index of the article
-            const articleIdx = state.sources[sourceName].findIndex(article => {
-                return article.url === url
-            });
-            // change isBookmarked of found article to true
-            state.sources[sourceName][articleIdx].isBookmarked = isBookmarked;
         }
     }
 })

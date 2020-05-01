@@ -23,7 +23,6 @@ function Article({ title, url, description, source, isBookmarked }) {
             isBookmarked: !isBookmarked,
             source
         }));
-        // dispatch(updateBookmarkedAritcleInSources({ url, sourceName: source.name, isBookmarked: !isBookmarked }));
     }, [title, url, description, userId, isBookmarked, dispatch, source ])
 
     return (

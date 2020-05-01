@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from '../Axios';
-import { setError } from "./uiSlice";
+import { dispatchErrorWrapper } from "helpers/helpers";
 
 /**
  * constants
@@ -79,37 +79,39 @@ export default authSlice.reducer;
  * Async actions
  */
 export const auth = payload => async dispatch => {
-    try {
+    const asyncFunction = async function() {
         const { email, password, ...rest } = payload.data;
-        let res;
-
         // Sign in route
         if (payload.isLogin) {
-            const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE}`
-
-            res = await axios.post(LOGIN_URL, { email, password, returnSecureToken: true });
-            dispatch(setToken({ data: res.data }));
+            await sendLoginRequest(dispatch, email, password);
         }
         // Sign up route
         else {
-            const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE}`;
-
-            res = await axios.post(SIGNUP_URL, { email, password });
-            dispatch(setToken({ data: res.data }));
-
-            // Store additional user info, with userId
-            const userId = res.data.localId;
-            res = await axios.post('/users.json', {
-                ...rest,
-                userId
-            })
+            await sendSignupRequest(email, password, dispatch, rest);
         }
-
-    } catch (error) {
-        console.log(error);
-        dispatch(setError({ hasError: error?.response.data.error.message }));
     }
+    
+    dispatchErrorWrapper(asyncFunction, dispatch);
 }
 
 
+async function sendLoginRequest(dispatch, email, password) {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE}`
+    const res = await axios.post(url, { email, password, returnSecureToken: true });
+    dispatch(setToken({ data: res.data }));
+}
+
+async function sendSignupRequest(email, password, dispatch, rest) {
+    const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE}`;
+    let res = await axios.post(SIGNUP_URL, { email, password });
+
+    dispatch(setToken({ data: res.data }));
+
+    // Store additional user info, with userId
+    const userId = res.data.localId;
+    res = await axios.post('/users.json', {
+        ...rest,
+        userId
+    });
+}
 

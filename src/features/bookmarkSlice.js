@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../Axios";
 import { objectToArrayObject } from "helpers/helpers";
+import { setError } from "./uiSlice";
 
 
 const bookmarkSlice = createSlice({
@@ -24,18 +25,15 @@ export default bookmarkSlice.reducer;
 
 
 export const createBookmark = payload => async dispatch => {
-    // const query = '?auth=' + token.id + '&orderBy="userId"&equalTo="' + token.userId + '"';
-    // const url = 'https://react-aggregator.firebaseio.com?orderBy="userId"&equalTo="' + payload.userId + '"';
-
-
     try {
         await axios.post('/bookmarks.json', { ...payload });
         dispatch(saveBookmark({bookmark: payload}));
     } catch (error) {
         console.log(error);
-        // dispatch(setError({ hasError: error.response.data.error.message }));
+        dispatch(setError({ hasError: error.message }));
     }
 }
+
 
 export const getBookmarks = payload => async dispatch => {
     const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
