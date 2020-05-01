@@ -5,7 +5,9 @@ import useBookmarks from 'hooks/useBookmarks';
 function Bookmarks() {
     const bookmarks = useBookmarks();
 
-    return <NewsSource name="Bookmarks" articles={bookmarks} />
+    return bookmarks.length === 0 
+    ? <p>You have 0 bookmark</p>
+    : <NewsSource name="Bookmarks" articles={bookmarks} />
 }
 
 export default Bookmarks
