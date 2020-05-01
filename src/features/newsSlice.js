@@ -6,10 +6,11 @@ const newsSlice = createSlice({
     name: 'news',
     initialState: {
         sources: {},
-        loading: true
+        isLoading: true
     },
 
     reducers: {
+        setIsLoading: state => {state.isLoading = false},
         // organize sources
         populateSources: (state, { payload }) => {
             state.sources = {};
@@ -33,13 +34,11 @@ const newsSlice = createSlice({
                 // Push article to their matched source
                 state.sources[article.source.name].push(newArticle);
             });
-
-            state.loading = false;
         }
     }
 })
 
-export const { populateSources } = newsSlice.actions;
+export const { populateSources, setIsLoading } = newsSlice.actions;
 
 
 // fetch articles from a given array of domain(s)
@@ -47,15 +46,15 @@ export const fetchSources = ({ bookmarks, url }) => async dispatch => {
     const fetchDataFromAPI = async function () {
         const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
         const res = await axios.get(url + appendedApiQuery);
-
+        
         dispatch(populateSources({ articles: res.data.articles, bookmarks }));
     }
 
-    dispatchErrorWrapper(fetchDataFromAPI, dispatch);
+    dispatchErrorWrapper(fetchDataFromAPI, dispatch, setIsLoading);
 }
 
 
 export const selectSources = state => state.news.sources;
-export const selectLoading = state => state.news.loading;
+export const selectLoading = state => state.news.isLoading;
 
 export default newsSlice.reducer

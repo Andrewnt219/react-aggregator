@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form'
 import Input from '../Input/Input';
 import classes from '../Form.module.scss';
 import Button from 'components/ui/Button/Button';
+import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 
 
-function LoginForm({ onSubmit }) {
+function LoginForm({ onSubmit, isLoading }) {
     const { register, handleSubmit, errors } = useForm();
 
     return (
@@ -29,6 +30,7 @@ function LoginForm({ onSubmit }) {
                 register={register} />
 
             <Button type="submit">SUBMIT</Button>
+            {isLoading && <LoadingIndicator size="1rem" />}
         </form>
     )
 }

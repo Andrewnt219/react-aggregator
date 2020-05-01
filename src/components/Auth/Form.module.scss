@@ -1,4 +1,4 @@
-@import 'variable.scss';
+@import "variable.scss";
 
 .Form {
     display: flex;
@@ -8,7 +8,7 @@
     justify-content: space-evenly;
     width: 100%;
     max-width: 30rem;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     padding: 1rem;
     border: 2px solid $mint;
 
@@ -21,13 +21,18 @@
     button {
         margin: 1rem auto 0 auto;
         color: $mint;
-        transition: all .3s ease;
-        padding: .5rem 1rem;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
         border-radius: 2px;
 
-        &:focus, &:hover {
+        &:focus,
+        &:hover {
             background-color: $mint;
             color: $white;
+        }
+
+        &+span {
+            margin-left: auto;
         }
     }
 }

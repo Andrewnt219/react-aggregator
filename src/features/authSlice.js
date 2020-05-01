@@ -18,12 +18,11 @@ const authSlice = createSlice({
         isLoading: false
     },
     reducers: {
-        setIsLoading: (state, {payload}) => { state.isloading = payload.isLoading},
+        setIsLoading: (state, {payload}) => { state.isLoading = payload.isLoading},
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
             state.userId = payload.data.localId;
-            state.isLoading = false;
 
             // Store token in local storage
             localStorage.setItem(TOKEN, JSON.stringify({
@@ -88,8 +87,8 @@ export const auth = payload => async dispatch => {
             await sendSignupRequest(email, password, dispatch, rest);
         }
     }
-    
-    dispatchErrorWrapper(sendAuthRequest, dispatch);
+
+    dispatchErrorWrapper(sendAuthRequest, dispatch, setIsLoading);
 }
 
 

@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import Input from '../Input/Input';
 import classes from '../Form.module.scss';
 import Button from 'components/ui/Button/Button';
+import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 
-
-function RegisterForm({ onSubmit }) {
+function RegisterForm({ onSubmit, isLoading }) {
     const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
 
     return (
@@ -61,6 +61,7 @@ function RegisterForm({ onSubmit }) {
                 })} />
 
             <Button type="submit">SUBMIT</Button>
+            {isLoading && <LoadingIndicator size="1rem" />}
         </form>
     )
 }

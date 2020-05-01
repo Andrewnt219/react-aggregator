@@ -22,8 +22,7 @@ function Auth() {
 
     let form = (
         <>
-            {isLoading && <Spinner />}
-            <LoginForm onSubmit={onSubmit} />
+            <LoginForm onSubmit={onSubmit} isLoading={isLoading}  />
             <div className={classes.switchContainer}>
                 <span style={{ color: '#bbb' }}>New to Aggregator? </span>
                 <span onClick={() => setIsLogin(false)}>Create an account</span>
@@ -35,8 +34,7 @@ function Auth() {
 
         form = (
             <>
-                {isLoading && <Spinner />}
-                <RegisterForm onSubmit={onSubmit} />
+                <RegisterForm onSubmit={onSubmit} isLoading={isLoading} />
                 <div className={classes.switchContainer}>
                     <span style={{ color: '#bbb' }}>Already have an account? </span>
                     <span onClick={() => setIsLogin(true)}>Sign in</span>
