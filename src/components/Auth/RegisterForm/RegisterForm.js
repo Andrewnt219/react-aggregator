@@ -60,8 +60,7 @@ function RegisterForm({ onSubmit, isLoading }) {
                     }
                 })} />
 
-            <Button type="submit">SUBMIT</Button>
-            {isLoading && <LoadingIndicator size="1rem" />}
+            {isLoading ? <LoadingIndicator size="1rem" /> : <Button type="submit">SUBMIT</Button>}
         </form>
     )
 }

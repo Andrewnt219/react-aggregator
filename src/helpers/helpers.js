@@ -4,7 +4,7 @@ export const objectToArrayObject = object => Object.entries(object).map(([id, va
     return ({...value, id});
 })
 
-export const dispatchErrorWrapper = async function(func, dispatch, setIsLoading) {
+export const asyncDispatchWrapper = async function(func, dispatch, setIsLoading) {
     try {
         await func();
         
@@ -20,6 +20,6 @@ export const dispatchErrorWrapper = async function(func, dispatch, setIsLoading)
         }
         dispatch(setError({ hasError: errorMessage }));
     }
-    
+
     dispatch(setIsLoading({isLoading: false}));
 }

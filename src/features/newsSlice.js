@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from '../Axios'
-import { dispatchErrorWrapper } from 'helpers/helpers';
+import { asyncDispatchWrapper } from 'helpers/helpers';
 
 const newsSlice = createSlice({
     name: 'news',
@@ -50,7 +50,7 @@ export const fetchSources = ({ bookmarks, url }) => async dispatch => {
         dispatch(populateSources({ articles: res.data.articles, bookmarks }));
     }
 
-    dispatchErrorWrapper(fetchDataFromAPI, dispatch, setIsLoading);
+    asyncDispatchWrapper(fetchDataFromAPI, dispatch, setIsLoading);
 }
 
 

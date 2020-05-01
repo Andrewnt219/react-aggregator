@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from '../Axios';
-import { dispatchErrorWrapper } from "helpers/helpers";
+import { asyncDispatchWrapper } from "helpers/helpers";
 
 /**
  * constants
@@ -88,7 +88,7 @@ export const auth = payload => async dispatch => {
         }
     }
 
-    dispatchErrorWrapper(sendAuthRequest, dispatch, setIsLoading);
+    asyncDispatchWrapper(sendAuthRequest, dispatch, setIsLoading);
 }
 
 

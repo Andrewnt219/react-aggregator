@@ -30,9 +30,9 @@
             background-color: $mint;
             color: $white;
         }
+    }
 
-        &+span {
-            margin-left: auto;
-        }
+    div + span {
+        margin: 1rem auto 0 auto;
     }
 }

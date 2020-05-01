@@ -29,8 +29,7 @@ function LoginForm({ onSubmit, isLoading }) {
                 errors={errors}
                 register={register} />
 
-            <Button type="submit">SUBMIT</Button>
-            {isLoading && <LoadingIndicator size="1rem" />}
+            {isLoading ? <LoadingIndicator size="1rem" /> : <Button type="submit">SUBMIT</Button>}
         </form>
     )
 }

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../Axios";
-import { objectToArrayObject, dispatchErrorWrapper } from "helpers/helpers";
+import { objectToArrayObject, asyncDispatchWrapper } from "helpers/helpers";
 
 
 const bookmarkSlice = createSlice({
@@ -37,7 +37,7 @@ export const createBookmark = payload => async dispatch => {
         dispatch(saveBookmark({ bookmark: {...payload, id: res.data.name} }));
     }
 
-    dispatchErrorWrapper(addBookmarkToDB, dispatch, setIsLoading);
+    asyncDispatchWrapper(addBookmarkToDB, dispatch, setIsLoading);
 }
 
 export const getBookmarks = payload => async dispatch => {
@@ -49,7 +49,7 @@ export const getBookmarks = payload => async dispatch => {
         dispatch(populateBookmarks(bookmarks));
     }
 
-    dispatchErrorWrapper(fetchBookmarksFromDB, dispatch, setIsLoading);
+    asyncDispatchWrapper(fetchBookmarksFromDB, dispatch, setIsLoading);
 }
 
 export const deleteBookmark = ({ id }) => async dispatch => {
@@ -58,6 +58,6 @@ export const deleteBookmark = ({ id }) => async dispatch => {
         dispatch(removeBookmark(id));
     }
 
-    dispatchErrorWrapper(deleteBookmarkFromDB, dispatch, setIsLoading);
+    asyncDispatchWrapper(deleteBookmarkFromDB, dispatch, setIsLoading);
 }
 
