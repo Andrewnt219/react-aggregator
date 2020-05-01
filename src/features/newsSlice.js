@@ -24,8 +24,10 @@ const newsSlice = createSlice({
                 const newArticle = {
                     ...article,
                     // Eval found bookmark to boolean
-                    isBookmarked: Boolean(found)
+                    isBookmarked: Boolean(found),
+                    id: found && found.id
                 }
+                console.log(newArticle);
 
                 // Init sources' property to an array if have not yet
                 if (!state.sources[article.source.name]) state.sources[article.source.name] = [];

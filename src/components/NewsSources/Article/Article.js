@@ -6,23 +6,29 @@ import { AnimatePresence, motion } from 'framer-motion'
 import classes from './Article.module.scss'
 import { selectUserId } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { createBookmark } from 'features/bookmarkSlice'
+import { createBookmark, deleteBookmark } from 'features/bookmarkSlice'
 
-function Article({ title, url, description, source, isBookmarked }) {
+function Article({ id, title, url, description, source, isBookmarked }) {
     const [show, setShow] = useState(false);
     const userId = useSelector(selectUserId);
     const dispatch = useDispatch();
+    console.log(id);
 
     const toggleBookmark = useCallback(() => {
-        dispatch(createBookmark({
-            title,
-            url,
-            description,
-            userId,
-            isBookmarked: !isBookmarked,
-            source
-        }));
-    }, [title, url, description, userId, isBookmarked, dispatch, source ])
+        if(!isBookmarked) {
+            dispatch(createBookmark({
+                title,
+                url,
+                description,
+                userId,
+                isBookmarked: !isBookmarked,
+                source
+            }));
+        } else {
+            dispatch(deleteBookmark({id}));
+        }
+
+    }, [title, url, description, userId, isBookmarked, dispatch, source, id])
 
     return (
         <article className={classes.container} onMouseLeave={() => setShow(false)} >

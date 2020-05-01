@@ -5,9 +5,9 @@ import classes from './NewsSources.module.scss'
 function NewsSources({sources}) {
     return (
         <div className={classes.NewsSources}>
-            {Object.entries(sources).map(([key, value]) => <NewsSource
-                key={key}
-                name={key}
+            {Object.entries(sources).map(([id, value]) => <NewsSource
+                key={id}
+                name={id}
                 articles={value} />
             )}
         </div>
