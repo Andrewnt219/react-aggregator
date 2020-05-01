@@ -21,5 +21,5 @@ export const asyncDispatchWrapper = async function(func, dispatch, setIsLoading)
         dispatch(setError({ hasError: errorMessage }));
     }
 
-    setIsLoading && dispatch(setIsLoading({isLoading: false}));
+    setIsLoading && setIsLoading(false);
 }

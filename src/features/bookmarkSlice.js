@@ -6,8 +6,7 @@ import { objectToArrayObject, asyncDispatchWrapper } from "helpers/helpers";
 const bookmarkSlice = createSlice({
     name: 'bookmark',
     initialState: {
-        bookmarks: [],
-        isLoading: false
+        bookmarks: []
     },
     reducers: {
         saveBookmark: (state, { payload }) => {
@@ -19,12 +18,11 @@ const bookmarkSlice = createSlice({
         removeBookmark: (state, { payload }) => {
             const idx = state.bookmarks.findIndex(bookmark => bookmark.id === payload);
             state.bookmarks.splice(idx, 1);
-        },
-        setIsLoading: (state, {payload}) => {state.isLoading = payload.isLoading; }
+        }
     }
 })
 
-export const { saveBookmark, populateBookmarks, removeBookmark, setIsLoading } = bookmarkSlice.actions;
+export const { saveBookmark, populateBookmarks, removeBookmark } = bookmarkSlice.actions;
 export const selectBookmarks = state => state.bookmarks.bookmarks;
 export const selectIsLoading = state => state.bookmarks.isLoading;
 export default bookmarkSlice.reducer;
@@ -40,10 +38,11 @@ export const createBookmark = payload => async dispatch => {
     asyncDispatchWrapper(addBookmarkToDB, dispatch);
 }
 
-export const getBookmarks = payload => async dispatch => {
+export const getBookmarks = ({userId, setIsLoading}) => async dispatch => {
     const fetchBookmarksFromDB = async function () {
-        dispatch(setIsLoading({isLoading: true}));
-        const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
+        setIsLoading(true);
+
+        const query = '?orderBy="userId"&equalTo="' + userId + '"';
         const res = await axios.get('/bookmarks.json' + query);
         const bookmarks = objectToArrayObject(res.data);
 
