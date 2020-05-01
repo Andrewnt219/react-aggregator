@@ -12,10 +12,13 @@ const newsSlice = createSlice({
     },
 
     reducers: {
+        initSource: (state) => {
+            state.sources = {};
+            state.loading = false;
+        },
         // organize sources
         populateSources: (state, { payload }) => {
             // initSources here to guarantee they always go together
-            state.sources = {};
 
             // Categorize articles by their source
             payload.articles.forEach((article) => {
@@ -41,7 +44,7 @@ const newsSlice = createSlice({
     }
 })
 
-export const { populateSources, updateBookmarkedAritcleInSources } = newsSlice.actions;
+export const { initSource, populateSources } = newsSlice.actions;
 
 
 // fetch articles from a given array of domain(s)
