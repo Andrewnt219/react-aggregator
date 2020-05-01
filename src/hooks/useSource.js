@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import { selectSources, fetchSource, initSources } from 'features/newsSlice'
+import { selectSources, fetchSources } from 'features/newsSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import useBookmarks from './useBookmarks';
 
@@ -11,9 +11,8 @@ function useSource(urls) {
     const bookmarks = useBookmarks();
 
     useEffect(() => {
-        dispatch(initSources());
-        urls.forEach(url => dispatch(fetchSource({url, bookmarks})));
-    }, [dispatch, urls]);
+        urls.forEach(url => dispatch(fetchSources({url, bookmarks})));
+    }, [dispatch, urls, bookmarks]);
 
 
 

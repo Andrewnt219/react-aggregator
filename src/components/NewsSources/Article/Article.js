@@ -7,7 +7,7 @@ import classes from './Article.module.scss'
 import { selectUserId } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBookmark } from 'features/bookmarkSlice'
-import { setArticleBookmark } from 'features/newsSlice'
+import { updateBookmarkedAritcleInSources } from 'features/newsSlice'
 
 function Article({ title, url, description, source, isBookmarked }) {
     const [show, setShow] = useState(false);
@@ -23,7 +23,7 @@ function Article({ title, url, description, source, isBookmarked }) {
             isBookmarked: !isBookmarked,
             source
         }));
-        dispatch(setArticleBookmark({ url, sourceName: source.name, isBookmarked: !isBookmarked }));
+        // dispatch(updateBookmarkedAritcleInSources({ url, sourceName: source.name, isBookmarked: !isBookmarked }));
     }, [title, url, description, userId, isBookmarked, dispatch, source ])
 
     return (

@@ -6,7 +6,7 @@ function NewsSource({name, articles}) {
     return (
         <article className={classes.container}>
             <h1>{name}</h1>
-            {articles.map((article) => <Article key={article.url} {...article} />)}
+            {articles.map((article) => <Article key={article.title} {...article} />)}
         </article>
     )
 }

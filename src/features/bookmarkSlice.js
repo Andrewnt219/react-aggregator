@@ -10,7 +10,7 @@ const bookmarkSlice = createSlice({
     },
     reducers: {
         saveBookmark: (state, { payload }) => {
-            state.bookmarks.push(payload);
+            state.bookmarks.push(payload.bookmark);
         },
         populateBookmarks: (state, {payload}) => {
             state.bookmarks = payload;
@@ -29,7 +29,7 @@ export const createBookmark = payload => async dispatch => {
 
 
     try {
-        const res = await axios.post('/bookmarks.json', { ...payload });
+        await axios.post('/bookmarks.json', { ...payload });
         dispatch(saveBookmark({bookmark: payload}));
     } catch (error) {
         console.log(error);
