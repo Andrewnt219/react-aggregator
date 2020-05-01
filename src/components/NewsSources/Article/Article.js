@@ -12,7 +12,6 @@ function Article({ id, title, url, description, source, isBookmarked }) {
     const [show, setShow] = useState(false);
     const userId = useSelector(selectUserId);
     const dispatch = useDispatch();
-    console.log(id);
 
     const toggleBookmark = useCallback(() => {
         if(!isBookmarked) {

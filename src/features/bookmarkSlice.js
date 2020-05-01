@@ -29,9 +29,9 @@ export default bookmarkSlice.reducer;
 
 export const createBookmark = payload => async dispatch => {
     const addBookmarkToDB = async function () {
-        await axios.post('/bookmarks.json', { ...payload });
+        const res = await axios.post('/bookmarks.json', { ...payload });
 
-        dispatch(saveBookmark({ bookmark: payload }));
+        dispatch(saveBookmark({ bookmark: {...payload, id: res.data.name} }));
     }
 
     dispatchErrorWrapper(addBookmarkToDB, dispatch);

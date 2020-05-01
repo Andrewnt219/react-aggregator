@@ -1,7 +1,7 @@
 import { setError } from "features/uiSlice";
 
 export const objectToArrayObject = object => Object.entries(object).map(([id, value]) => {
-    return {...value, id};
+    return ({...value, id});
 })
 
 export const dispatchErrorWrapper = async function(func, dispatch) {
