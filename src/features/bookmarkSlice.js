@@ -32,7 +32,6 @@ export const createBookmark = payload => async dispatch => {
     dispatchErrorWrapper(addBookmarkToDB, dispatch);
 }
 
-
 export const getBookmarks = payload => async dispatch => {
     const fetchBookmarksFromDB = async function() {
         const query = '?orderBy="userId"&equalTo="' + payload.userId + '"';
