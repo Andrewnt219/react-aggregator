@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "../Axios";
 import { objectToArrayObject, asyncDispatchWrapper } from "helpers/helpers";
 
-
+/* Bad planning leaded to this slice */
 const bookmarkSlice = createSlice({
     name: 'bookmark',
     initialState: {
         bookmarks: [],
-        isLoading: true
+        isLoading: false
     },
     reducers: {
         saveBookmark: (state, { payload }) => {
@@ -17,7 +17,7 @@ const bookmarkSlice = createSlice({
             state.bookmarks = payload;
         },
         removeBookmark: (state, { payload }) => {
-            const idx = state.bookmarks.findIndex(bookmark => bookmark.id === payload.id);
+            const idx = state.bookmarks.findIndex(bookmark => bookmark.id === payload);
             state.bookmarks.splice(idx, 1);
         },
         setIsLoading: (state, {payload}) => {state.isLoading = payload.isLoading; }

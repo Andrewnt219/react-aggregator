@@ -6,6 +6,7 @@ export const objectToArrayObject = object => Object.entries(object).map(([id, va
 
 export const asyncDispatchWrapper = async function(func, dispatch, setIsLoading) {
     try {
+        dispatch(setIsLoading({isLoading: true}));
         await func();
         
     } catch (error) {

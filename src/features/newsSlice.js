@@ -6,11 +6,11 @@ const newsSlice = createSlice({
     name: 'news',
     initialState: {
         sources: {},
-        isLoading: true
+        isLoading: false
     },
 
     reducers: {
-        setIsLoading: state => {state.isLoading = false},
+        setIsLoading: (state, {payload}) => {state.isLoading = payload.isLoading},
         // organize sources
         populateSources: (state, { payload }) => {
             state.sources = {};
