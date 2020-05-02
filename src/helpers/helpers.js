@@ -4,6 +4,14 @@ export const objectToArrayObject = object => Object.entries(object).map(([id, va
     return ({ ...value, id });
 })
 
+export const keyObjectToObjectWithKey = object => {
+    const [key, value] = Object.entries(object)[0];
+    return ({
+        id: key,
+        ...value
+    })
+}
+
 export const asyncDispatchWrapper = async function (func, dispatch, setIsLoading) {
     try {
         await func();

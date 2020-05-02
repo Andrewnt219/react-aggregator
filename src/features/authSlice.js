@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from '../Axios';
-import { asyncDispatchWrapper } from "helpers/helpers";
+import { asyncDispatchWrapper, keyObjectToObjectWithKey } from "helpers/helpers";
 
 /**
  * constants
@@ -29,7 +29,7 @@ const authSlice = createSlice({
             // Store token in local storage
             localStorage.setItem(TOKEN, JSON.stringify({
                 id: payload.data.idToken,
-                userId: payload.data.localId,
+                localId: payload.data.localId,
                 // Calculate expiring time (in seconds)
                 timeStampInMs: new Date().getTime() + payload.data.expiresIn * 1000
             }))
@@ -43,7 +43,7 @@ const authSlice = createSlice({
         logout: (state) => {
             localStorage.removeItem(TOKEN);
             state.isLoggedIn = false;
-            state.userId = null;
+            state.user = null;
         }
     }
 })
@@ -93,7 +93,7 @@ async function createAccountInDB(res, rest, email) {
     const userId = res.data.localId;
     res = await axios.post('/users.json', {
         ...rest,
-        userId,
+        localId: userId,
         email
     });
     return res;
@@ -130,9 +130,10 @@ export const checkToken = payload => async dispatch => {
         }
         else {
             // Query user from DB and populate state if not expires
-            const query = '?orderBy="userId"&equalTo="' + token.userId + '"';
+            const query = '?orderBy="localId"&equalTo="' + token.localId + '"';
             const res = await axios.get('/users.json' + query);
-            dispatch(setUser({ userData: res.data, isLoggedIn: true }))
+            const userData = keyObjectToObjectWithKey(res.data);
+            dispatch(setUser({ userData, isLoggedIn: true }))
         }
     }
 
