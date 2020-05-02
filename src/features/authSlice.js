@@ -16,7 +16,8 @@ const authSlice = createSlice({
         user: {
             localId: ''
         },
-        isLoggedIn: false,
+        // to prevent the protected page from auto redirecting before checkToken
+        isLoggedIn: true,
         isLoading: false
     },
     reducers: {
