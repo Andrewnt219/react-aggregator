@@ -5,10 +5,12 @@ import { asyncDispatchWrapper } from 'helpers/helpers';
 const newsSlice = createSlice({
     name: 'news',
     initialState: {
-        sources: {}
+        sources: {},
+        isLoading: false
     },
 
     reducers: {
+        setIsLoading: (state, {payload}) => {state.isLoading = payload.isLoading},
         // organize sources
         populateSources: (state, { payload }) => {
             state.sources = {};
@@ -36,27 +38,16 @@ const newsSlice = createSlice({
     }
 })
 
-export const { populateSources } = newsSlice.actions;
+export const { populateSources, setIsLoading } = newsSlice.actions;
 
 
 // fetch articles from a given array of domain(s)
-export const fetchSources = ({ bookmarks, url, setIsLoading }) => async dispatch => {
+export const fetchSources = ({ bookmarks, url }) => async dispatch => {
     const fetchDataFromAPI = async function () {
         const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
-        let res, articles = [];
-
-        if(url.includes('>>')) {
-            const urls = url.split('>>');
-            for(const u of urls) {
-                res = await axios.get(u + appendedApiQuery);
-                articles.push(...res.data.articles);
-            }
-        } else {
-            res = await axios.get(url + appendedApiQuery);
-            articles = res.data.articles;
-        }
-
-        dispatch(populateSources({ articles, bookmarks }));
+        const res = await axios.get(url + appendedApiQuery);
+        
+        dispatch(populateSources({ articles: res.data.articles, bookmarks }));
     }
 
     asyncDispatchWrapper(fetchDataFromAPI, dispatch, setIsLoading);

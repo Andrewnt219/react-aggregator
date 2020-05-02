@@ -4,6 +4,8 @@ import useSource from 'hooks/useSource'
 import useTitle from 'hooks/useTitle'
 import NewsSources from 'components/NewsSources/NewsSources';
 import withErrorHandler from 'hoc/withErrorHandler'
+import { selectLoading } from 'features/newsSlice';
+import { useSelector } from 'react-redux';
 import Spinner from 'components/ui/Spinner/Spinner';
 
 const URLS = [
@@ -14,8 +16,8 @@ const URLS = [
 const TITLE = 'Web Development';
 
 function Webdev() {
-    // random token separating urls, to by pass free tier newsapi
-    const [sources, loading] = useSource(URLS.join('>>'))
+    const loading = useSelector(selectLoading);
+    const sources = useSource(URLS)
     useTitle(TITLE);
 
     return (

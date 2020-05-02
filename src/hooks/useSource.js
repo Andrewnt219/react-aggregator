@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react'
+import {useEffect} from 'react'
 import { selectSources, fetchSources } from 'features/newsSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import useBookmarks from './useBookmarks';
 
 
 
-function useSource(url) {
-
+function useSource(urls) {
     const sources = useSelector(selectSources);
     const dispatch = useDispatch();
-    const [bookmarks, isLoading, setIsLoading] = useBookmarks();
-
-
-    // prevent re-loading when setting bookmark
-    useEffect(() => {
-        setIsLoading(true);
-    },[setIsLoading, url])
+    const bookmarks = useBookmarks();
 
     useEffect(() => {
-        dispatch(fetchSources({ url, bookmarks, setIsLoading }));
-    }, [dispatch, url, bookmarks, setIsLoading]);
+        urls.forEach(url => dispatch(fetchSources({url, bookmarks})));
+    }, [dispatch, urls, bookmarks]);
 
 
 
-    return [sources, isLoading];
+    return sources;
 }
 
 export default useSource

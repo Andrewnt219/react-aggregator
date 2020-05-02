@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { selectUserId } from 'features/authSlice';
-import { getBookmarks, selectBookmarks } from 'features/bookmarkSlice';
+import { getBookmarks, selectBookmarks, setIsLoading } from 'features/bookmarkSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function useBookmarks() {
@@ -8,13 +8,11 @@ function useBookmarks() {
     const dispatch = useDispatch();
     const bookmarks = useSelector(selectBookmarks);
 
-    const [isLoading, setIsLoading] = useState(false);
-    
-    useEffect(() => {
-        userId && dispatch(getBookmarks({ userId, setIsLoading }));
+    useEffect(() => {    
+        userId && dispatch(getBookmarks({ userId }));
     }, [dispatch, userId]);
 
-    return [bookmarks, isLoading, setIsLoading];
+    return bookmarks;
 }
 
 export default useBookmarks

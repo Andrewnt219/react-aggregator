@@ -8,10 +8,11 @@ import Spinner from 'components/ui/Spinner/Spinner';
 import { useSelector } from 'react-redux';
 import { selectLoading } from 'features/newsSlice';
 
-const URLS = 'https://newsapi.org/v2/top-headlines?country=us';
+const URLS = ['https://newsapi.org/v2/top-headlines?country=us'];
 const TITLE = 'Trending'
 function Trending() {
-    const [sources, loading] = useSource(URLS);
+    const loading = useSelector(selectLoading);
+    const sources = useSource(URLS);
     useTitle(TITLE);
     return (
         loading
