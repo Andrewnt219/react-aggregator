@@ -14,9 +14,11 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         user: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        isLoading: false
     },
     reducers: {
+        setIsLoading: (state, { payload }) => { state.isLoading = payload },
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
@@ -78,13 +80,14 @@ export default authSlice.reducer;
 export const auth = payload => async dispatch => {
     const sendAuthRequest = async function () {
         const { email, password, ...rest } = payload.data;
+        dispatch(setIsLoading(true));
         if (payload.isLogin)
             await sendLoginRequest(dispatch, email, password);
         else
             await sendSignupRequest(email, password, dispatch, rest);
     }
 
-    asyncDispatchWrapper(sendAuthRequest, dispatch, payload.setIsLoading);
+    asyncDispatchWrapper(sendAuthRequest, dispatch, setIsLoading);
 }
 
 
