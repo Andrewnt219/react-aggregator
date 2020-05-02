@@ -17,8 +17,11 @@ function User() {
                 <Avatar src={avatar[0]} />
             </Card>
 
-            <Setting icon={faPalette}>Change theme</Setting>
             <Setting icon={faInfoCircle}>My profile</Setting>
+            <div className={classes.profie}>
+                
+            </div>
+            <Setting icon={faPalette}>Change theme</Setting>
             <Setting icon={faComment}>Contact us</Setting>
 
             <Button clicked={() => dispatch(logout())}>LOG OUT</Button>

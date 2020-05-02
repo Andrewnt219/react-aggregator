@@ -13,14 +13,14 @@ const TOKEN = 'token';
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        userId: null,
+        user: null,
         isLoggedIn: false
     },
     reducers: {
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
-            state.userId = payload.data.localId;
+            state.user = payload.data;
 
             // Store token in local storage
             localStorage.setItem(TOKEN, JSON.stringify({
@@ -76,14 +76,12 @@ export default authSlice.reducer;
  * Async actions
  */
 export const auth = payload => async dispatch => {
-    const sendAuthRequest = async function() {
+    const sendAuthRequest = async function () {
         const { email, password, ...rest } = payload.data;
-        if (payload.isLogin) {
+        if (payload.isLogin)
             await sendLoginRequest(dispatch, email, password);
-        }
-        else {
+        else
             await sendSignupRequest(email, password, dispatch, rest);
-        }
     }
 
     asyncDispatchWrapper(sendAuthRequest, dispatch, payload.setIsLoading);
@@ -91,22 +89,38 @@ export const auth = payload => async dispatch => {
 
 
 async function sendLoginRequest(dispatch, email, password) {
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE}`
-    const res = await axios.post(url, { email, password, returnSecureToken: true });
+    const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE}`
+    const res = await axios.post(LOGIN_URL, { email, password, returnSecureToken: true });
     dispatch(setToken({ data: res.data }));
 }
 
 async function sendSignupRequest(email, password, dispatch, rest) {
     const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE}`;
-    let res = await axios.post(SIGNUP_URL, { email, password });
+    let res = await createAccountInAuth(rest, SIGNUP_URL, email, password);
+    const userData = res.data;
 
-    dispatch(setToken({ data: res.data }));
+    await createAccountInDB(res, rest);
 
-    // Store additional user info, with userId
+    dispatch(setToken({ data: userData }));
+}
+
+async function createAccountInDB(res, rest) {
     const userId = res.data.localId;
     res = await axios.post('/users.json', {
         ...rest,
         userId
     });
+    return res;
+}
+
+async function createAccountInAuth(rest, SIGNUP_URL, email, password) {
+    const { lastName, firstName } = rest;
+    let displayName;
+    if (!firstName && !lastName)
+        displayName = 'User';
+    else
+        displayName = firstName + ' ' + lastName;
+    let res = await axios.post(SIGNUP_URL, { email, password, displayName: displayName });
+    return res;
 }
 

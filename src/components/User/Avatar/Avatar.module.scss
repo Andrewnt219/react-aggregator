@@ -30,7 +30,7 @@
 
         p {
             color: white;
-            margin: auto auto 1rem auto;
+            margin: auto;
             width: 80%;
             border-radius: 50%;
         }
@@ -40,7 +40,7 @@
 
         & > div {
             visibility: visible;
-            background-color: rgba($color: $black, $alpha: .7);
+            background-color: rgba($color: $black, $alpha: .75);
             
         }
     }
