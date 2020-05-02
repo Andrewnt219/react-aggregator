@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp, faBookmark } from '@fortawesome/free-solid-svg-icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import classes from './Article.module.scss'
-import { selectUserId } from 'features/authSlice'
+import { selectUser } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBookmark, deleteBookmark } from 'features/bookmarkSlice'
 
 function Article({ id, title, url, description, source, isBookmarked }) {
     const [show, setShow] = useState(false);
-    const userId = useSelector(selectUserId);
+    const {localId} = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const toggleBookmark = useCallback(() => {
@@ -19,7 +19,7 @@ function Article({ id, title, url, description, source, isBookmarked }) {
                 title,
                 url,
                 description,
-                userId,
+                userId: localId,
                 isBookmarked: !isBookmarked,
                 source
             }));
@@ -27,7 +27,7 @@ function Article({ id, title, url, description, source, isBookmarked }) {
             dispatch(deleteBookmark({ id }));
         }
 
-    }, [title, url, description, userId, isBookmarked, dispatch, source, id])
+    }, [title, url, description, localId, isBookmarked, dispatch, source, id])
 
     return (
         <article className={classes.container} onMouseLeave={() => setShow(false)} >

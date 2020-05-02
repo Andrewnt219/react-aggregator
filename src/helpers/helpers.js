@@ -1,13 +1,13 @@
 import { setError } from "features/uiSlice";
 
 export const objectToArrayObject = object => Object.entries(object).map(([id, value]) => {
-    return ({...value, id});
+    return ({ ...value, id });
 })
 
-export const asyncDispatchWrapper = async function(func, dispatch, setIsLoading) {
+export const asyncDispatchWrapper = async function (func, dispatch, setIsLoading) {
     try {
         await func();
-        
+
     } catch (error) {
         console.log(error);
 
@@ -18,8 +18,35 @@ export const asyncDispatchWrapper = async function(func, dispatch, setIsLoading)
         } catch (err) {
             errorMessage = error.message;
         }
+        switch (errorMessage.toUpperCase()) {
+            case ('NETWORK ERROR'):
+                errorMessage = 'Check your Internet'
+                break;
+            case ('EMAIL_EXISTS'):
+                errorMessage = 'Email exists! Try signing in'
+                break;
+            case ('TOO_MANY_ATTEMPTS_TRY_LATER'):
+                errorMessage = 'Too manu failed attempts, please try again later'
+                break;
+            case ('EMAIL_NOT_FOUND'):
+                errorMessage = 'Email is not found! Try signing up'
+                break;
+            case ('INVALID_PASSWORD'):
+                errorMessage = 'Invalid email or password'
+                break;
+            case ('USER_DISABLED'):
+                errorMessage = 'Your account has been suspensed'
+                break;
+            case ('WEAK_PASSWORD'):
+                errorMessage = 'Password must be at least 6 characters'
+                break;
+
+            default:
+                errorMessage = 'Something went south'
+                break;
+        }
         dispatch(setError({ hasError: errorMessage }));
     }
 
-    setIsLoading && dispatch(setIsLoading({isLoading: false}));
+    setIsLoading && dispatch(setIsLoading({ isLoading: false }));
 }
