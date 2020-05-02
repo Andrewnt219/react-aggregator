@@ -13,12 +13,14 @@ const TOKEN = 'token';
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: null,
+        user: {
+            localId: ''
+        },
         isLoggedIn: false,
         isLoading: false
     },
     reducers: {
-        setIsLoading: (state, { payload }) => { state.isLoading = payload.isLoading},
+        setIsLoading: (state, { payload }) => { state.isLoading = payload.isLoading },
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
@@ -29,32 +31,13 @@ const authSlice = createSlice({
                 id: payload.data.idToken,
                 userId: payload.data.localId,
                 // Calculate expiring time (in seconds)
-                timeStamp: (new Date().getTime() * 1000) + payload.data.expiresIn
+                timeStampInMs: new Date().getTime() + payload.data.expiresIn * 1000
             }))
         },
         // Will be run everytime the app is RELOADED
-        checkToken: (state) => {
-            // Get the token
-            const tokenJSON = localStorage.getItem(TOKEN);
-
-            // Check if token exists in localStorage
-            if (tokenJSON) {
-                const token = JSON.parse(tokenJSON);
-
-                // Check if the token is expired
-                if (new Date().getTime() > token.timeStamp) {
-                    // logOut if expires
-                    localStorage.removeItem(TOKEN);
-                    state.isLoggedIn = false;
-                    state.userId = null;
-                }
-                else {
-                    // Auto log in if not expires
-                    state.isLoggedIn = true;
-                    state.userId = token.userId;
-                }
-            }
-
+        setUser: (state, { payload }) => {
+            state.user = payload.userData;
+            state.isLoggedIn = payload.isLoggedIn;
         },
         // User logout
         logout: (state) => {
@@ -68,14 +51,14 @@ const authSlice = createSlice({
 /**
  * exports
  */
-export const { setToken, checkToken, logout, setIsLoading } = authSlice.actions;
+export const { setToken, setUser, logout, setIsLoading } = authSlice.actions;
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 export const selectUserId = state => state.auth.userId;
 export const selectIsLoading = state => state.auth.isLoading;
 export default authSlice.reducer;
 
 /**
- * Async actions
+ * send auth request
  */
 export const auth = payload => async dispatch => {
     const sendAuthRequest = async function () {
@@ -110,7 +93,7 @@ async function createAccountInDB(res, rest, email) {
     const userId = res.data.localId;
     res = await axios.post('/users.json', {
         ...rest,
-        userId, 
+        userId,
         email
     });
     return res;
@@ -127,3 +110,30 @@ async function createAccountInAuth(rest, SIGNUP_URL, email, password) {
     return res;
 }
 
+/**
+ * Check token
+ */
+
+export const checkToken = payload => async dispatch => {
+    // Get the token
+    const tokenJSON = localStorage.getItem(TOKEN);
+
+    // Check if token exists in localStorage
+    if (tokenJSON) {
+        const token = JSON.parse(tokenJSON);
+        
+        // Check if the token is expired
+        if (new Date().getTime() > token.timeStampInMs) {
+            // logOut if expires
+            localStorage.removeItem(TOKEN);
+            dispatch(setUser({ isLoggedIn: false }));
+        }
+        else {
+            // Query user from DB and populate state if not expires
+            const query = '?orderBy="userId"&equalTo="' + token.userId + '"';
+            const res = await axios.get('/users.json' + query);
+            dispatch(setUser({ userData: res.data, isLoggedIn: true }))
+        }
+    }
+
+}
