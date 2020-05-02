@@ -17,7 +17,8 @@ const TITLE = 'Web Development';
 
 function Webdev() {
     const loading = useSelector(selectLoading);
-    const sources = useSource(URLS)
+    // random token to separate links (in order to by pass limited tier of API)
+    const sources = useSource(URLS.join('>>'))
     useTitle(TITLE);
 
     return (

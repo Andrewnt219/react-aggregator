@@ -5,14 +5,14 @@ import useBookmarks from './useBookmarks';
 
 
 
-function useSource(urls) {
+function useSource(url) {
     const sources = useSelector(selectSources);
     const dispatch = useDispatch();
     const bookmarks = useBookmarks();
 
     useEffect(() => {
-        urls.forEach(url => dispatch(fetchSources({url, bookmarks})));
-    }, [dispatch, urls, bookmarks]);
+        dispatch(fetchSources({url, bookmarks}));
+    }, [dispatch, url, bookmarks]);
 
 
 

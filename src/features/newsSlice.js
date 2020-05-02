@@ -45,9 +45,20 @@ export const { populateSources, setIsLoading } = newsSlice.actions;
 export const fetchSources = ({ bookmarks, url }) => async dispatch => {
     const fetchDataFromAPI = async function () {
         const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
-        const res = await axios.get(url + appendedApiQuery);
+        let res, articles = [];
+
+        if(url.includes('>>')) {
+            const urls = url.split('>>');
+            for (const u of urls) {
+                res  = await axios.get(u + appendedApiQuery);
+                articles.push(...res.data.articles);
+            }
+        } else {
+            res = await axios.get(url + appendedApiQuery)
+            articles = res.data.articles;
+        }
         
-        dispatch(populateSources({ articles: res.data.articles, bookmarks }));
+        dispatch(populateSources({ articles, bookmarks }));
     }
 
     asyncDispatchWrapper(fetchDataFromAPI, dispatch, setIsLoading);
