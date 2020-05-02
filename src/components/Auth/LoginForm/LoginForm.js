@@ -8,7 +8,6 @@ import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 
 function LoginForm({ onSubmit, isLoading }) {
     const { register, handleSubmit, errors } = useForm();
-
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
             <h1>Login</h1>

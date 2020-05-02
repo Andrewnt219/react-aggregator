@@ -2,7 +2,7 @@ import RegisterForm from "components/Auth/RegisterForm/RegisterForm";
 import withErrorHandler from 'hoc/withErrorHandler'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { auth, selectIsLoggedIn } from 'features/authSlice'
+import { auth, selectIsLoggedIn, selectIsLoading, setIsLoading } from 'features/authSlice'
 import LoginForm from "components/Auth/LoginForm/LoginForm";
 import classes from './Auth.module.scss'
 import { Redirect } from "react-router-dom";
@@ -12,11 +12,11 @@ function Auth() {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const isLoading = useSelector(selectIsLoading);
 
     function onSubmit(data) {
-        setIsLoading(true);
-        dispatch(auth({ data, isLogin, setIsLoading }));
+        dispatch(setIsLoading({isLoading: true}));
+        dispatch(auth({ data, isLogin }));
     }
 
     let form = (

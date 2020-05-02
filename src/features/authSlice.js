@@ -18,7 +18,7 @@ const authSlice = createSlice({
         isLoading: false
     },
     reducers: {
-        setIsLoading: (state, { payload }) => { state.isLoading = payload },
+        setIsLoading: (state, { payload }) => { state.isLoading = payload.isLoading},
         setToken: (state, { payload }) => {
             // Set up states
             state.isLoggedIn = true;
@@ -80,7 +80,6 @@ export default authSlice.reducer;
 export const auth = payload => async dispatch => {
     const sendAuthRequest = async function () {
         const { email, password, ...rest } = payload.data;
-        dispatch(setIsLoading(true));
         if (payload.isLogin)
             await sendLoginRequest(dispatch, email, password);
         else
@@ -102,16 +101,17 @@ async function sendSignupRequest(email, password, dispatch, rest) {
     let res = await createAccountInAuth(rest, SIGNUP_URL, email, password);
     const userData = res.data;
 
-    await createAccountInDB(res, rest);
+    await createAccountInDB(res, rest, email);
 
     dispatch(setToken({ data: userData }));
 }
 
-async function createAccountInDB(res, rest) {
+async function createAccountInDB(res, rest, email) {
     const userId = res.data.localId;
     res = await axios.post('/users.json', {
         ...rest,
-        userId
+        userId, 
+        email
     });
     return res;
 }
