@@ -6,7 +6,7 @@ const newsSlice = createSlice({
     name: 'news',
     initialState: {
         sources: {},
-        isLoading: false
+        isLoading: true
     },
 
     reducers: {
