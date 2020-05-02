@@ -23,7 +23,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
 
         <Switch>
-          <ProtectedRoute path="/me" component={User} />
+          <ProtectedRoute path="/account/me" component={User} />
           <ProtectedRoute path="/bookmarks" component={Bookmarks} />
 
           <Route path="/web-dev" component={Webdev} />

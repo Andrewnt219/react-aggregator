@@ -30,6 +30,9 @@
             &.active,
             &:hover {
                 color: $red;
+            }
+
+            &.active {
                 font-weight: bold;
             }
         }

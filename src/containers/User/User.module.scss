@@ -1,0 +1,13 @@
+@import 'variable.scss';
+
+.User {
+    button {
+        display: block;
+        margin-left: auto;
+        color: $mint;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+@import 'variable.scss';
+
+.Card {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 2px  #eee;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    background-color: lighten($color: $red, $amount: 10);
+    border-radius: 5px;
+}

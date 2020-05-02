@@ -43,7 +43,7 @@ function Auth() {
         )
     }
 
-    return isLoggedIn ? <Redirect to="/me" /> : form
+    return isLoggedIn ? <Redirect to="/account/me" /> : form
 
 }
 

@@ -1,0 +1,26 @@
+@import "variable.scss";
+
+.Setting {
+    display: flex;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 2px solid $mint;
+    border-radius: 5px;
+    transition: all 200ms ease;
+    cursor: pointer;
+
+    * {
+        color: gray;
+    }
+    svg {
+        padding-right: 0.5rem;
+    }
+
+    &:hover {
+        background-color: $mint;
+
+        * {
+            color: white;
+        }
+    }
+}
