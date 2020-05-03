@@ -6,9 +6,9 @@ import Button from 'components/ui/Button/Button';
 import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 
 function RegisterForm({ onSubmit, isLoading }) {
-    const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
+    const { register, handleSubmit, errors, watch, triggerValidation } = useForm({ validateCriteriaMode: "all" });
     const watchPassword = watch("password");
-    console.log(errors);
+    const inputSetting = { errors, triggerValidation };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
@@ -17,13 +17,13 @@ function RegisterForm({ onSubmit, isLoading }) {
                 type="text"
                 name="lastName"
                 label="Last Name"
-                errors={errors}
+                inputSetting={inputSetting}
                 register={register}
                 placeholder="Last name" />
 
             <Input
                 type="text"
-                errors={errors}
+                inputSetting={inputSetting}
                 register={register}
                 name="firstName"
                 placeholder="First Name"
@@ -33,7 +33,7 @@ function RegisterForm({ onSubmit, isLoading }) {
             <Input
                 type="email"
                 name="email"
-                errors={errors}
+                inputSetting={inputSetting}
                 label="Email"
                 placeholder="example@ex.com"
                 register={register({
@@ -54,7 +54,7 @@ function RegisterForm({ onSubmit, isLoading }) {
                 name="password"
                 label="Password"
                 placeholder="Password"
-                errors={errors}
+                inputSetting={inputSetting}
                 register={register({
                     required: "Password is required",
                     minLength: {
@@ -68,9 +68,9 @@ function RegisterForm({ onSubmit, isLoading }) {
                 name="confirmPassword"
                 label="Confirm Password"
                 placeholder="Confirm your password"
-                errors={errors}
+                inputSetting={inputSetting}
                 register={register({
-                        
+                    validate: value => value === watchPassword || "Password does not match"
                 })} />
 
             {isLoading ? <LoadingIndicator size="1rem" /> : <Button type="submit">SUBMIT</Button>}

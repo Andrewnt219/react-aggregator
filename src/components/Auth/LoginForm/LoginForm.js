@@ -7,14 +7,15 @@ import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 
 
 function LoginForm({ onSubmit, isLoading }) {
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, triggerValidation } = useForm();
+    const inputSetting = { errors, triggerValidation };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
             <h1>Login</h1>
             <Input
                 type="email"
                 name="email"
-                errors={errors}
+                inputSetting={inputSetting}
                 label="Email"
                 placeholder="example@ex.com"
                 register={register} />
@@ -25,7 +26,7 @@ function LoginForm({ onSubmit, isLoading }) {
                 name="password"
                 label="Password"
                 placeholder="password"
-                errors={errors}
+                inputSetting={inputSetting}
                 register={register} />
 
             {isLoading ? <LoadingIndicator size="1rem" /> : <Button type="submit">SUBMIT</Button>}
