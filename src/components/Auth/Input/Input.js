@@ -3,6 +3,7 @@ import React from 'react'
 import classes from './Input.module.scss'
 
 const Input = ({ isTextArea, errors, name, label, register, handleChange, ...htmlAttrs }) => {
+    console.log(errors);
     return (
         <div className={classes.Input}>
             {label && <label htmlFor={name}>{label}</label>}

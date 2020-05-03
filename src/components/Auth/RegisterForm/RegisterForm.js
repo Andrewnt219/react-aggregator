@@ -6,7 +6,9 @@ import Button from 'components/ui/Button/Button';
 import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 
 function RegisterForm({ onSubmit, isLoading }) {
-    const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
+    const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
+    const watchPassword = watch("password");
+    console.log(errors);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
@@ -59,6 +61,16 @@ function RegisterForm({ onSubmit, isLoading }) {
                         value: 6,
                         message: "Password is at least 6 characters"
                     }
+                })} />
+
+            <Input
+                type="password"
+                name="confirmPassword"
+                label="Confirm Password"
+                placeholder="Confirm your password"
+                errors={errors}
+                register={register({
+                        
                 })} />
 
             {isLoading ? <LoadingIndicator size="1rem" /> : <Button type="submit">SUBMIT</Button>}
