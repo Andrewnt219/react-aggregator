@@ -44,7 +44,7 @@ const authSlice = createSlice({
         logout: (state) => {
             localStorage.removeItem(TOKEN);
             state.isLoggedIn = false;
-            state.user = null;
+            state.user = {};
         }
     }
 })
@@ -140,5 +140,7 @@ export const checkToken = payload => async dispatch => {
             dispatch(setUser({ userData }))
         }
     }
+    else
+        dispatch(logout())
 
 }
