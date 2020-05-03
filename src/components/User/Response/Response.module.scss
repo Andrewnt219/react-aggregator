@@ -1,0 +1,9 @@
+.Response {
+    display: grid;
+    row-gap: .5rem;
+
+    .date {
+        font-style: italic;
+        font-weight: lighter;
+    }
+}

@@ -1,9 +1,9 @@
 import React from 'react'
 import classes from './Backdrop.module.scss'
 
-const Backdrop = ({ show, setShow }) => show
+const Backdrop = ({ show, setShow, setNeedRefreshed }) => show
     ? <div
-        onClick={() => setShow(false)}
+        onClick={() => {setNeedRefreshed && setNeedRefreshed(true); setShow(false)}}
         className={classes.Backdrop} />
     : null;
 

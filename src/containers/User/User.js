@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'components/ui/Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout, selectUser } from 'features/authSlice'
@@ -6,20 +6,30 @@ import Card from 'components/User/Card/Card';
 import avatar from 'assets/avatar'
 import Avatar from 'components/User/Avatar/Avatar';
 import DropDownSetting from 'components/User/DropDownSetting/DropDownSetting';
-import { faPalette, faComment, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faInbox, faComment, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import classes from './User.module.scss'
 import PopUpSetting from 'components/User/PopUpSetting/PopUpSetting';
 import Contact from 'components/User/Contact/Contact';
-import { storeUserResponse, selectIsLoading } from 'features/contactUsSlice';
+import { storeUserResponse, selectIsLoading, getUserReponses, selectUserResponses } from 'features/contactUsSlice';
+import Response from 'components/User/Response/Response'
 
 function User() {
     const dispatch = useDispatch();
+    const [needRefresh, setNeedRefreshed] = useState(false);
+
     const user = useSelector(selectUser);
+    const { email } = user;
     const isLoading = useSelector(selectIsLoading);
+    const userResponses = useSelector(selectUserResponses);
+
+    useEffect(() => {
+        dispatch(getUserReponses(email));
+        return () => { setNeedRefreshed(false) }
+    }, [email, dispatch, needRefresh])
 
 
     function onSubmit(data) {
-        dispatch(storeUserResponse({...data, isResolved: false}));
+        dispatch(storeUserResponse({ ...data, isResolved: false, resolvedMessage: "", issuedDate: new Date() }));
     }
 
     return (
@@ -36,10 +46,21 @@ function User() {
                 <p>Display name: {user.displayName}</p>
             </DropDownSetting>
 
-            <DropDownSetting icon={faPalette} title="Your message">
-
+            <DropDownSetting icon={faInbox} title="Your messages">
+                {userResponses.map((response, idx) => <Response
+                    key={idx}
+                    subject={response.subject}
+                    message={response.message}
+                    isResolved={response.isResolved}
+                    issuedDate={response.issuedDate}
+                    resolvedMessage={response.resolvedMessage}
+                />)}
             </DropDownSetting>
-            <PopUpSetting icon={faComment} title="Contact us">
+
+            <PopUpSetting
+                setNeedRefreshed={setNeedRefreshed}
+                icon={faComment}
+                title="Contact us">
                 <Contact
                     email={user.email}
                     onSubmit={onSubmit}

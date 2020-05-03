@@ -1,13 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Popup from 'components/ui/Popup/Popup'
 import Setting from '../Setting/Setting'
 
-function PopUpSetting({icon, title, children}) {
+function PopUpSetting({ icon, title, children, setNeedRefreshed }) {
     const [showPopup, setShowPopup] = useState(false);
     return (
         <>
-            <Setting icon={icon} title={title} clicked={() => setShowPopup(true)} />
-            <Popup show={showPopup} setShow={setShowPopup} >
+            <Setting icon={icon} title={title} clicked={() => setShowPopup(true) } />
+            <Popup show={showPopup} setShow={setShowPopup} setNeedRefreshed={setNeedRefreshed} >
                 {children}
             </Popup>
         </>

@@ -4,6 +4,8 @@ export const objectToArrayObject = object => Object.entries(object).map(([id, va
     return ({ ...value, id });
 })
 
+export const generateQuery = (key, value) => `?orderBy="${key}"&equalTo="${value}"`
+
 export const keyObjectToObjectWithKey = object => {
     const [key, value] = Object.entries(object)[0];
     return ({

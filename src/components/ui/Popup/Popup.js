@@ -6,7 +6,7 @@ import classes from './Popup.module.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../Button/Button'
 
-function Popup({ children, show, setShow }) {
+function Popup({ children, show, setShow, setNeedRefreshed }) {
     return (
         <>
             <AnimatePresence>
@@ -17,12 +17,12 @@ function Popup({ children, show, setShow }) {
                     exit={{ y: "20px", x: "-50%", opacity: 0 }}
                     transition={{ duration: .4 }}
                 >
-                    <Button onClick={() => setShow(false)}>GO BACK</Button>
+                    <Button onClick={() => {setNeedRefreshed && setNeedRefreshed(true); setShow(false)}}>GO BACK</Button>
                     {children}
                 </motion.div>}
             </AnimatePresence>
 
-            <Backdrop setShow={setShow} show={show} />
+            <Backdrop setShow={setShow} show={show} setNeedRefreshed={setNeedRefreshed} />
         </>
     )
 }
