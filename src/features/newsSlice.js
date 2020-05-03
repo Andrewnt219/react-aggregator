@@ -44,6 +44,7 @@ export const { populateSources, setIsLoading } = newsSlice.actions;
 // fetch articles from a given array of domain(s)
 export const fetchSources = ({ bookmarks, url }) => async dispatch => {
     const fetchDataFromAPI = async function () {
+        dispatch(setIsLoading({isLoading: true}));
         const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
         let res, articles = [];
 
