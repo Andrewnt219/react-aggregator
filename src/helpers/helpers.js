@@ -50,9 +50,14 @@ export const asyncDispatchWrapper = async function (func, dispatch, setIsLoading
             case ('WEAK_PASSWORD'):
                 errorMessage = 'Password must be at least 6 characters'
                 break;
+            case ('INVALID_EMAIL'):
+                errorMessage = 'Invalid email or password'
+                break;
+            case ('MISSING_PASSWORD'):
+                errorMessage = 'Invalid email or password'
+                break;
 
             default:
-                errorMessage = 'Something went south'
                 break;
         }
         dispatch(setError({ hasError: errorMessage }));

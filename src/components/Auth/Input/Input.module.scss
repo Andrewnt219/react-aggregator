@@ -1,5 +1,10 @@
 @import "variable.scss";
 
+
+.hasError {
+    background-color: lighten($color: $red, $amount: 25);
+}
+
 .Input {
     display: grid;
     grid-template-areas: 
@@ -18,7 +23,6 @@
         border-radius: 2px;
         padding: 0.5rem 1rem;
         font-size: 1rem;
-        
     }
 
     label {
@@ -34,3 +38,4 @@
         color: $red;
     }
 }
+

@@ -8,19 +8,13 @@ import LoadingIndicator from 'components/ui/LoadingIndicator/LoadingIndicator';
 function RegisterForm({ onSubmit, isLoading }) {
     const { register, handleSubmit, errors, watch, triggerValidation } = useForm({ validateCriteriaMode: "all" });
     const watchPassword = watch("password");
+    const watchFirstName = watch("firstName", '');
+    const watchLastName = watch("lastName", '');
     const inputSetting = { errors, triggerValidation };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
             <h1>Sign Up</h1>
-            <Input
-                type="text"
-                name="lastName"
-                label="Last Name"
-                inputSetting={inputSetting}
-                register={register}
-                placeholder="Last name" />
-
             <Input
                 type="text"
                 inputSetting={inputSetting}
@@ -29,6 +23,25 @@ function RegisterForm({ onSubmit, isLoading }) {
                 placeholder="First Name"
                 title="Please enter your first name"
                 label="First name" />
+
+            <Input
+                type="text"
+                name="lastName"
+                label="Last Name"
+                inputSetting={inputSetting}
+                register={register}
+                placeholder="Last name" />
+
+
+            <Input
+                type="text"
+                inputSetting={inputSetting}
+                register={register}
+                defaultValue={watchFirstName + ' ' + watchLastName}
+                name="displayName"
+                placeholder="Display Name"
+                title="Please enter your display name"
+                label="Display Name" />
 
             <Input
                 type="email"

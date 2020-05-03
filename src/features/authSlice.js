@@ -63,26 +63,31 @@ export default authSlice.reducer;
  */
 export const auth = payload => async dispatch => {
     const sendAuthRequest = async function () {
-        const { email, password, ...rest } = payload.data;
+        const { email, password, displayName, confirmPassword, ...rest } = payload.data;
         if (payload.isLogin)
-            await sendLoginRequest(dispatch, email, password, rest);
+            await sendLoginRequest(dispatch, email, password, displayName, rest);
         else
-            await sendSignupRequest(email, password, dispatch, rest);
+            await sendSignupRequest(email, password, dispatch, displayName, rest);
     }
 
     asyncDispatchWrapper(sendAuthRequest, dispatch, setIsLoading);
 }
 
 
-async function sendLoginRequest(dispatch, email, password, rest) {
+async function sendLoginRequest(dispatch, email, password, displayName, rest) {
     const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE}`
-    const res = await axios.post(LOGIN_URL, { email, password, returnSecureToken: true });
-    dispatch(setToken({ data: { ...res.data, ...rest } }));
+    const loginRes = await axios.post(LOGIN_URL, { email, password, displayName,  returnSecureToken: true });
+
+    const query = '?orderBy="localId"&equalTo="' + loginRes.data.localId + '"';
+    const DBQueryRes = await axios.get('/users.json' + query);
+    const userDBData = keyObjectToObjectWithKey(DBQueryRes.data);
+    
+    dispatch(setToken({ data: { ...loginRes.data, ...userDBData } }));
 }
 
-async function sendSignupRequest(email, password, dispatch, rest) {
+async function sendSignupRequest(email, password, dispatch, displayName, rest) {
     const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE}`;
-    let res = await createAccountInAuth(rest, SIGNUP_URL, email, password);
+    let res = await createAccountInAuth(rest, SIGNUP_URL, email, password, displayName);
     const userData = { ...res.data, ...rest };
 
     await createAccountInDB(res, rest, email);

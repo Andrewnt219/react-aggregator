@@ -3,12 +3,15 @@ import React from 'react'
 import classes from './Input.module.scss'
 
 const Input = ({ isTextArea, inputSetting, name, label, register, handleChange, ...htmlAttrs }) => {
+    const errorInput = inputSetting.errors[name] ? classes.hasError : null;
+
     return (
         <div className={classes.Input}>
             {label && <label htmlFor={name}>{label}</label>}
 
             {isTextArea
                 ? <textarea
+                    className={errorInput}
                     onBlur={() => inputSetting.triggerValidation(name)}
                     onChange={handleChange}
                     id={name}
@@ -16,6 +19,7 @@ const Input = ({ isTextArea, inputSetting, name, label, register, handleChange, 
                     ref={register}
                     {...htmlAttrs} />
                 : <input
+                    className={errorInput}
                     onBlur={() => inputSetting.triggerValidation(name)}
                     onChange={handleChange}
                     id={name}
