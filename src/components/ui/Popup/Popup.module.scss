@@ -1,0 +1,41 @@
+@import "variable.scss";
+
+.Modal {
+    width: max-content;
+    max-width: 70vw;
+    height: max-content;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    // transform: translate(-50%, -50%);
+    background-color: $white;
+    box-shadow: 0 2px 5px $black;
+    padding: 1rem 3rem;
+    z-index: 1600;
+    cursor: pointer;
+
+    & > button {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        color: $mint;
+        
+        &:hover {
+            text-decoration: none;
+
+            &::before {
+                content: "";
+                display: block;
+                margin-right: 0.3rem;
+
+                /* Make a left arrow */
+                width: 0;
+                height: 0;
+                border-top: 0.4rem solid transparent;
+                border-bottom: 0.4rem solid transparent;
+                border-right: 0.4rem solid $mint;
+            }
+        }
+    }
+}

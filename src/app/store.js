@@ -4,6 +4,7 @@ import newsReducer from 'features/newsSlice'
 import uiReducer from 'features/uiSlice'
 import authReducer from 'features/authSlice'
 import bookmarkReducer from 'features/bookmarkSlice'
+import contactUsReducer from 'features/contactUsSlice'
 
 export default configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
     news: newsReducer,
     ui: uiReducer,
     auth: authReducer,
-    bookmarks: bookmarkReducer
+    bookmarks: bookmarkReducer,
+    contactUs: contactUsReducer
   },
 });

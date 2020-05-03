@@ -51,6 +51,7 @@ function RegisterForm({ onSubmit, isLoading }) {
                 type="password"
                 name="password"
                 label="Password"
+                placeholder="Password"
                 errors={errors}
                 register={register({
                     required: "Password is required",

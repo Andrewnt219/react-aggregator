@@ -1,7 +1,10 @@
 @import 'variable.scss';
 
 .User {
-    button {
+    form {
+        width: 70vw;
+    }
+    & > button {
         display: block;
         margin-left: auto;
         color: $mint;
