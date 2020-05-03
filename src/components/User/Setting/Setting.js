@@ -1,22 +1,15 @@
-import React, { useState } from 'react'
-import classes from './Setting.module.scss'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import DropDown from '../DropDown/DropDown'
+import classes from './Setting.module.scss'
 
-function Setting(props) {
-    const [showDropDown, setShowDropDown] = useState(false);
-    const settingClass = showDropDown ? [classes.Setting, classes.active] : [classes.Setting];
+function Setting({active, clicked, icon, title}) {
+    const settingClass = active ? [classes.DropDownSetting, classes.active] : [classes.DropDownSetting];
     return (
-        <>
-            <div onClick={() => setShowDropDown(prev => !prev)} 
+        <div onClick={clicked}
             className={settingClass.join(' ')}>
-                <FontAwesomeIcon icon={props.icon} />
-                <p>{props.title}</p>
-            </div>
-            <DropDown show={showDropDown}>
-                {props.children}
-            </DropDown>
-        </>
+            <FontAwesomeIcon icon={icon} />
+            <p>{title}</p>
+        </div>
     )
 }
 
