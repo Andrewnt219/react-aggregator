@@ -6,7 +6,7 @@ function PopUpSetting({ icon, title, children, setNeedRefreshed }) {
     const [showPopup, setShowPopup] = useState(false);
     return (
         <>
-            <Setting icon={icon} title={title} clicked={() => setShowPopup(true) } />
+            <Setting icon={icon} active={showPopup} title={title} clicked={() => setShowPopup(true)} />
             <Popup show={showPopup} setShow={setShowPopup} setNeedRefreshed={setNeedRefreshed} >
                 {children}
             </Popup>
