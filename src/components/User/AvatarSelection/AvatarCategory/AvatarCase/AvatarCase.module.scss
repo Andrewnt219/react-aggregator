@@ -1,0 +1,9 @@
+@import 'variable.scss';
+$avatar-w: 4rem;
+.AvatarCase {
+    justify-self: center;
+    align-self: center;
+    width: $avatar-w;
+    height: $avatar-w;
+    border-radius: 50%;
+}

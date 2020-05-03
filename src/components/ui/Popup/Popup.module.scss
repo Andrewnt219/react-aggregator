@@ -1,6 +1,8 @@
 @import "variable.scss";
 
 .Modal {
+    overflow: scroll;
+    max-height: 90vh;
     width: max-content;
     max-width: 70vw;
     height: max-content;

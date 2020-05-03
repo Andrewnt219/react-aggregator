@@ -3,7 +3,7 @@ import Button from 'components/ui/Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout, selectUser } from 'features/authSlice'
 import Card from 'components/User/Card/Card';
-import avatar from 'assets/avatar'
+import avatars from 'assets/avatar'
 import Avatar from 'components/User/Avatar/Avatar';
 import DropDownSetting from 'components/User/DropDownSetting/DropDownSetting';
 import { faInbox, faComment, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
@@ -12,10 +12,13 @@ import PopUpSetting from 'components/User/PopUpSetting/PopUpSetting';
 import Contact from 'components/User/Contact/Contact';
 import { storeUserResponse, selectIsLoading, getUserReponses, selectUserResponses } from 'features/contactUsSlice';
 import Response from 'components/User/Response/Response'
+import Popup from 'components/ui/Popup/Popup';
+import AvatarSelection from 'components/User/AvatarSelection/AvatarSelection'
 
 function User() {
     const dispatch = useDispatch();
     const [needRefresh, setNeedRefreshed] = useState(false);
+    const [showAvatarSelection, setShowAvatarSelection] = useState(false);
 
     const user = useSelector(selectUser);
     const { email } = user;
@@ -35,9 +38,20 @@ function User() {
     return (
         <div className={classes.User}>
             <Card >
-                <Avatar src={avatar[0]} />
+                <Avatar
+                    setShowAvatarSelection={setShowAvatarSelection}
+                    src={user.avatar ? user.avatar : avatars[0]} />
                 <h1>{user.displayName}</h1>
             </Card>
+
+            <Popup
+                show={showAvatarSelection}
+                setShow={setShowAvatarSelection}
+                setNeedRefreshed={setNeedRefreshed}  >
+                <AvatarSelection
+                    setShowAvatarSelection={setShowAvatarSelection}
+                    id={user.id} />
+            </Popup>
 
             <DropDownSetting icon={faInfoCircle} title="My profile" >
                 <p>Email: {user.email} </p>

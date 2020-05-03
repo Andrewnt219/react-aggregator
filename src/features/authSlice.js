@@ -13,9 +13,7 @@ const TOKEN = 'token';
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: {
-            localId: ''
-        },
+        user: {},
         // to prevent the protected page from auto redirecting before checkToken
         isLoggedIn: true,
         isLoading: false
@@ -37,7 +35,7 @@ const authSlice = createSlice({
         },
         // Will be run everytime the app is RELOADED
         setUser: (state, { payload }) => {
-            state.user = payload.userData;
+            state.user = {...state.user, ...payload.userData};
             state.isLoggedIn = true;
         },
         // User logout
@@ -87,12 +85,12 @@ async function sendLoginRequest(dispatch, email, password, displayName, rest) {
 
 async function sendSignupRequest(email, password, dispatch, displayName, rest) {
     const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE}`;
-    let res = await createAccountInAuth(rest, SIGNUP_URL, email, password, displayName);
-    const userData = { ...res.data, ...rest };
+    let signUpRes = await createAccountInAuth(rest, SIGNUP_URL, email, password, displayName);
+    const userData = { ...signUpRes.data, ...rest };
 
-    await createAccountInDB(res, rest, email);
+    const postRes = await createAccountInDB(signUpRes, rest, email);
 
-    dispatch(setToken({ data: userData }));
+    dispatch(setToken({ data: {...userData, id: postRes.data.name} }));
 }
 
 async function createAccountInDB(res, rest, email) {
@@ -122,7 +120,6 @@ async function createAccountInAuth(rest, SIGNUP_URL, email, password) {
 /**
  * Check token
  */
-
 export const checkToken = payload => async dispatch => {
     // Get the token
     const tokenJSON = localStorage.getItem(TOKEN);
@@ -148,4 +145,16 @@ export const checkToken = payload => async dispatch => {
     else
         dispatch(logout())
 
+}
+
+/**
+ * Update user
+ */
+export const updateUserProfile = (id, newUserData) => async dispatch => {
+    const sendPutRequest = async function() {
+        dispatch(setIsLoading({isLoading: true}));
+        const res = await axios.patch(`/users/${id}.json`, newUserData);
+        dispatch(setUser({userData: res.data}));
+    }
+    asyncDispatchWrapper(sendPutRequest, dispatch, setIsLoading)
 }

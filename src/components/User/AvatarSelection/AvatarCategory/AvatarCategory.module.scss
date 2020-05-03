@@ -1,0 +1,8 @@
+.AvatarCategory {
+    display: grid;
+    width: 70vw;
+    cursor: normal;
+    column-gap: .5rem;
+    row-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+}
