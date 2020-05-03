@@ -37,7 +37,7 @@ export const asyncDispatchWrapper = async function (func, dispatch, setIsLoading
                 errorMessage = 'Too manu failed attempts, please try again later'
                 break;
             case ('EMAIL_NOT_FOUND'):
-                errorMessage = 'Email is not found! Try signing up'
+                errorMessage = 'Email not found! Try signing up'
                 break;
             case ('INVALID_PASSWORD'):
                 errorMessage = 'Invalid email or password'

@@ -5,9 +5,19 @@
     box-sizing: border-box;
     box-shadow: 2px 2px 2px  #eee;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     text-align: center;
     padding: 1rem;
     background-color: lighten($color: $red, $amount: 10);
     border-radius: 5px;
+
+    div:first-child {
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    h1 {
+        color: lighten($color: $red, $amount: 35);
+    }
 }

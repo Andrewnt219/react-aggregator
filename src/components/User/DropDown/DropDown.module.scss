@@ -2,4 +2,19 @@
 .DropDown {
     border-left: 2px solid $mint;
     padding-left: 1rem;
+    color:darken($color: #aaa, $amount: 20%);
+
+    & > *:hover{
+        color: $black;
+
+        &::after {
+            content: "";
+            height: .5rem;
+            width: .5rem;
+            border-radius: 50%;
+            background-color: $mint;
+            margin-left: .5rem;
+            display: inline-block;
+        }
+    }
 }

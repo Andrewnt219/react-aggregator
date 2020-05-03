@@ -10,15 +10,15 @@
     cursor: pointer;
 
     * {
-        color: gray;
+        color: $black;
     }
     svg {
         padding-right: 0.5rem;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
         background-color: $mint;
-
         * {
             color: white;
         }
