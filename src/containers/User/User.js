@@ -19,7 +19,7 @@ function User() {
 
 
     function onSubmit(data) {
-        dispatch(storeUserResponse(data));
+        dispatch(storeUserResponse({...data, isResolved: false}));
     }
 
     return (
@@ -36,7 +36,9 @@ function User() {
                 <p>Display name: {user.displayName}</p>
             </DropDownSetting>
 
-            <DropDownSetting icon={faPalette} title="Change theme"></DropDownSetting>
+            <DropDownSetting icon={faPalette} title="Your message">
+
+            </DropDownSetting>
             <PopUpSetting icon={faComment} title="Contact us">
                 <Contact
                     email={user.email}

@@ -11,7 +11,9 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import subclasses from './Contact.module.scss'
 
 function Contact({ email, onSubmit, isLoading }) {
-    const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
+    const { register, handleSubmit, errors, triggerValidation } = useForm({ validateCriteriaMode: "all" });
+    const inputSetting = {errors, triggerValidation}
+
     const isSubmitted = useSelector(selectIsSubmitted);
     const dispatch = useDispatch();
 
@@ -37,6 +39,7 @@ function Contact({ email, onSubmit, isLoading }) {
         <form onSubmit={handleSubmit(onSubmit)} className={classes.Form}>
             <h1>Contact Us</h1>
             <Input
+                inputSetting={inputSetting}
                 name="email"
                 type="text"
                 value={email}
@@ -46,15 +49,16 @@ function Contact({ email, onSubmit, isLoading }) {
 
 
             <Input
+                inputSetting={inputSetting}
                 type="text"
                 name="subject"
                 label="Subject"
-                errors={errors}
                 register={register({ required: "Please enter a subject line" })}
                 placeholder="Subject"
             />
 
             <Input
+                inputSetting={inputSetting}
                 isTextArea
                 label="Message"
                 register={register}
