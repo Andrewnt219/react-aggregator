@@ -61,14 +61,16 @@ function User() {
             </DropDownSetting>
 
             <DropDownSetting icon={faInbox} title="Your messages">
-                {userResponses.map((response, idx) => <Response
-                    key={idx}
-                    subject={response.subject}
-                    message={response.message}
-                    isResolved={response.isResolved}
-                    issuedDate={response.issuedDate}
-                    resolvedMessage={response.resolvedMessage}
-                />)}
+                {userResponses.length === 0
+                    ? <p>Your inbox is empty</p>
+                    : userResponses.map((response, idx) => <Response
+                        key={idx}
+                        subject={response.subject}
+                        message={response.message}
+                        isResolved={response.isResolved}
+                        issuedDate={response.issuedDate}
+                        resolvedMessage={response.resolvedMessage}
+                    />)}
             </DropDownSetting>
 
             <PopUpSetting
