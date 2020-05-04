@@ -7,27 +7,32 @@ import classes from './Article.module.scss'
 import { selectUser } from 'features/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBookmark, deleteBookmark } from 'features/bookmarkSlice'
+import { withRouter } from 'react-router-dom'
 
-function Article({ id, title, url, description, source, isBookmarked }) {
+function Article({ id, title, url, description, source, isBookmarked, ...router }) {
     const [show, setShow] = useState(false);
-    const {localId} = useSelector(selectUser);
+    const { localId } = useSelector(selectUser);
     const dispatch = useDispatch();
+    const {history} = router;
 
     const toggleBookmark = useCallback(() => {
-        if (!isBookmarked) {
-            dispatch(createBookmark({
-                title,
-                url,
-                description,
-                userId: localId,
-                isBookmarked: !isBookmarked,
-                source
-            }));
+        if (!localId) {
+            history.push('/account');
         } else {
-            dispatch(deleteBookmark({ id }));
+            if (!isBookmarked) {
+                dispatch(createBookmark({
+                    title,
+                    url,
+                    description,
+                    userId: localId,
+                    isBookmarked: !isBookmarked,
+                    source
+                }));
+            } else {
+                dispatch(deleteBookmark({ id }));
+            }
         }
-
-    }, [title, url, description, localId, isBookmarked, dispatch, source, id])
+    }, [history, title, url, description, localId, isBookmarked, dispatch, source, id])
 
     return (
         <article className={classes.container} onMouseLeave={() => setShow(false)} >
@@ -62,4 +67,4 @@ function Article({ id, title, url, description, source, isBookmarked }) {
     )
 }
 
-export default Article
+export default withRouter(Article)
