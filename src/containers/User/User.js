@@ -60,8 +60,8 @@ function User() {
 
                 <DropDownSetting icon={faInfoCircle} title="My profile" >
                     <p>Email: {user.email} </p>
-                    <p>First name: {user.firstName}</p>
-                    <p>Last name: {user.lastName}</p>
+                    {user.firstName && <p>First name: {user.firstName}</p>}
+                    {user.lastName && <p>Last name: {user.lastName}</p>}
                     <p>Display name: {user.displayName}</p>
                 </DropDownSetting>
 

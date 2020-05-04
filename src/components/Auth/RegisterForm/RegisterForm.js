@@ -34,7 +34,7 @@ function RegisterForm({ onSubmit, isLoading }) {
             <Input
                 type="text"
                 inputSetting={inputSetting}
-                register={register}
+                register={register({required: 'Display name is required'})}
                 name="displayName"
                 placeholder="Display Name"
                 title="Please enter your display name"
