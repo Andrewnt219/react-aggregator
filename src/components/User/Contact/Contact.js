@@ -28,7 +28,7 @@ function Contact({ email, onSubmit, isLoading }) {
     if (isSubmitted)
         submitArea = (
             <div className={subclasses.svg}>
-                <span>We will response to your message as soon as possible </span>
+                <span>Sent </span>
                 <FontAwesomeIcon
                     icon={faCheckCircle}
                     color="#2ec4b6" />

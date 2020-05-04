@@ -1,9 +1,31 @@
-.Response {
-    display: grid;
-    row-gap: .5rem;
+@import 'variable.scss';
 
-    .date {
-        font-style: italic;
-        font-weight: lighter;
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    .Response {
+        display: grid;
+        row-gap: .5rem;
+    
+        .date {
+            font-style: italic;
+            font-weight: lighter;
+        }
+    }
+
+    .deleteButton {
+        background-color: lighten($color: $red, $amount: 20);
+        padding: 0 1rem;
+        border-radius: 2px;
+        border: 0;
+        color: white;
+        cursor: pointer;
+        transition: all 200ms ease;
+    }
+
+    &:hover > .deleteButton {
+        background-color: $red;
     }
 }
+

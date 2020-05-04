@@ -19,6 +19,8 @@ function User() {
     const dispatch = useDispatch();
     const [needRefresh, setNeedRefreshed] = useState(false);
     const [showAvatarSelection, setShowAvatarSelection] = useState(false);
+    const [showPopupMessage, setShowPopupMessage] = useState(false);
+
 
     const user = useSelector(selectUser);
     const { email } = user;
@@ -65,13 +67,24 @@ function User() {
                     ? <p>Your inbox is empty</p>
                     : userResponses.map((response, idx) => <Response
                         key={idx}
+
                         subject={response.subject}
                         message={response.message}
                         isResolved={response.isResolved}
                         issuedDate={response.issuedDate}
                         resolvedMessage={response.resolvedMessage}
+                        id={response.id}
+
+                        setShowPopupMessage={setShowPopupMessage}
+                        setNeedRefreshed={setNeedRefreshed}
                     />)}
             </DropDownSetting>
+            <Popup
+                show={showPopupMessage}
+                setShow={setShowPopupMessage}
+                setNeedRefreshed={setNeedRefreshed}>
+                <p>Your message to the developer has been revoked</p>
+            </Popup>
 
             <PopUpSetting
                 setNeedRefreshed={setNeedRefreshed}

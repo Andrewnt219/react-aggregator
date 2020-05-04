@@ -11,11 +11,15 @@ const contactUsSlice = createSlice({
     reducers: {
         setIsLoading: (state, { payload }) => { state.isLoading = payload.isLoading },
         setIsSubmitted: (state, { payload }) => { state.isSubmitted = payload },
-        populateUserResponses: (state, { payload }) => { state.userResponses = payload.sort((first, second) => first.issuedDate < second.issuedDate) }
+        populateUserResponses: (state, { payload }) => { state.userResponses = payload.sort((first, second) => first.issuedDate < second.issuedDate) },
+        spliceUserResponses: (state, { payload }) => {
+            const responseIdx = state.userResponses.findIndex(response => response.id === payload);
+            state.userResponses.splice(responseIdx, 1);
+        }
     }
 })
 
-export const { setIsLoading, setIsSubmitted, populateUserResponses } = contactUsSlice.actions;
+export const { setIsLoading, setIsSubmitted, populateUserResponses, spliceUserResponses } = contactUsSlice.actions;
 export default contactUsSlice.reducer
 export const selectIsLoading = state => state.contactUs.isLoading;
 export const selectIsSubmitted = state => state.contactUs.isSubmitted;
@@ -41,4 +45,18 @@ export const getUserReponses = (userEmail) => async dispatch => {
     }
 
     asyncDispatchWrapper(sendGetRequest, dispatch, setIsLoading);
+}
+
+/**
+ * Revoke a response
+ */
+export const revokeResponse = (id) => async dispatch => {
+    const sendDeleteRequest = async function()
+    {
+        dispatch(setIsLoading({isLoading: false}));
+        await axios.delete(`/responses/${id}.json`);
+        dispatch(spliceUserResponses(id));
+    }
+
+    asyncDispatchWrapper(sendDeleteRequest, dispatch, setIsLoading);
 }

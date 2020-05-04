@@ -17,7 +17,15 @@ function Popup({ children, show, setShow, setNeedRefreshed }) {
                     exit={{ y: "20px", x: "-50%", opacity: 0 }}
                     transition={{ duration: .4 }}
                 >
-                    <Button onClick={() => {setNeedRefreshed && setNeedRefreshed(true); setShow(false)}}>GO BACK</Button>
+                    <Button onClick=
+                        {
+                            () => {
+                                setNeedRefreshed && setNeedRefreshed(true);
+                                setShow(false)
+                            }
+                        }>
+                        GO BACK
+                        </Button>
                     {children}
                 </motion.div>}
             </AnimatePresence>
