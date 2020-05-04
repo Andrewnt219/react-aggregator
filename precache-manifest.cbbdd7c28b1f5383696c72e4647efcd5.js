@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f438dbda66adb61192bab8a3495d20cd",
+    "revision": "b29dcc4ead96e5a15eb48a2f0ec9ccd8",
     "url": "/react-aggregator/index.html"
   },
   {
@@ -8,23 +8,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-aggregator/static/css/0.9e2a7fae.chunk.css"
   },
   {
-    "revision": "1e9cdd0cfa62bf9b5510",
+    "revision": "3cad3d0c828be5b54051",
     "url": "/react-aggregator/static/css/4.e0545e21.chunk.css"
   },
   {
-    "revision": "d5358e95635fcf05c02e",
+    "revision": "dda82c9aed4c4fb30ab4",
     "url": "/react-aggregator/static/css/6.98927784.chunk.css"
   },
   {
-    "revision": "149c7875a6524f7fa2c7",
+    "revision": "dedaa43c8ade00862362",
     "url": "/react-aggregator/static/css/7.0ae1a885.chunk.css"
   },
   {
-    "revision": "bea8f95944e04d5dab92",
+    "revision": "99ca65fac03a8d1bdcb2",
     "url": "/react-aggregator/static/css/8.7350e9e5.chunk.css"
   },
   {
-    "revision": "746505f1d34413dccfd2",
+    "revision": "a00c4acf26ef660eee85",
     "url": "/react-aggregator/static/css/main.5bdacb40.chunk.css"
   },
   {
@@ -40,12 +40,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-aggregator/static/js/1.3fa96d9c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "90d34e50dc297b8bc110",
-    "url": "/react-aggregator/static/js/10.ab932372.chunk.js"
+    "revision": "f279a8684acd60497508",
+    "url": "/react-aggregator/static/js/10.89ca4173.chunk.js"
   },
   {
-    "revision": "1e9cdd0cfa62bf9b5510",
-    "url": "/react-aggregator/static/js/4.d67bf9b7.chunk.js"
+    "revision": "3cad3d0c828be5b54051",
+    "url": "/react-aggregator/static/js/4.04018d3a.chunk.js"
   },
   {
     "revision": "840df013068e3f4399d6",
@@ -56,28 +56,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-aggregator/static/js/5.a28c8185.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d5358e95635fcf05c02e",
-    "url": "/react-aggregator/static/js/6.c3efcd86.chunk.js"
+    "revision": "dda82c9aed4c4fb30ab4",
+    "url": "/react-aggregator/static/js/6.e1ba4b97.chunk.js"
   },
   {
-    "revision": "149c7875a6524f7fa2c7",
-    "url": "/react-aggregator/static/js/7.27142e72.chunk.js"
+    "revision": "dedaa43c8ade00862362",
+    "url": "/react-aggregator/static/js/7.fee35dd1.chunk.js"
   },
   {
-    "revision": "bea8f95944e04d5dab92",
-    "url": "/react-aggregator/static/js/8.de99eea5.chunk.js"
+    "revision": "99ca65fac03a8d1bdcb2",
+    "url": "/react-aggregator/static/js/8.7f2e954d.chunk.js"
   },
   {
-    "revision": "818999b34f92f86d9ef3",
-    "url": "/react-aggregator/static/js/9.284c25cd.chunk.js"
+    "revision": "d3fca41221262f8e4d2c",
+    "url": "/react-aggregator/static/js/9.32cf397c.chunk.js"
   },
   {
-    "revision": "746505f1d34413dccfd2",
-    "url": "/react-aggregator/static/js/main.9bc5a815.chunk.js"
+    "revision": "a00c4acf26ef660eee85",
+    "url": "/react-aggregator/static/js/main.554f5656.chunk.js"
   },
   {
-    "revision": "b0f581db1f5ea57fa32f",
-    "url": "/react-aggregator/static/js/runtime-main.af35d6bf.js"
+    "revision": "367ad04b5538f1911bec",
+    "url": "/react-aggregator/static/js/runtime-main.0d52ff76.js"
   },
   {
     "revision": "a6f3aabbc8967b67f0de77d3ff9170e9",
@@ -296,6 +296,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-aggregator/static/media/Care_Azure.9e269033.png"
   },
   {
+    "revision": "1acbd0430176dba4c7de1b1b7bf55135",
+    "url": "/react-aggregator/static/media/Care_Bugs.1acbd043.png"
+  },
+  {
+    "revision": "7729b82c295a7d095720614ea87b3984",
+    "url": "/react-aggregator/static/media/Care_CPP.7729b82c.png"
+  },
+  {
     "revision": "4ac68298e5190c02d517b966b2a6974f",
     "url": "/react-aggregator/static/media/Care_CSharp.4ac68298.png"
   },
@@ -308,8 +316,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-aggregator/static/media/Care_GoogleCloud.d54cb14d.png"
   },
   {
+    "revision": "ecd56f2d6e08f7eca2b0a9e6600d35bb",
+    "url": "/react-aggregator/static/media/Care_Hello.ecd56f2d.png"
+  },
+  {
     "revision": "00c2abc2ea74b9756596329e1d4b8c44",
     "url": "/react-aggregator/static/media/Care_JS.00c2abc2.png"
+  },
+  {
+    "revision": "3b4a83c72f4f87f1a7738b935d615abd",
+    "url": "/react-aggregator/static/media/Care_LiterBug.3b4a83c7.png"
   },
   {
     "revision": "0abc86b24638ee8a6c59c4ee26a7d4cf",

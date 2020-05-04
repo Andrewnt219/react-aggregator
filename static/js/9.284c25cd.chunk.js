@@ -1,2 +1,0 @@
-(this.webpackJsonpaggregator=this.webpackJsonpaggregator||[]).push([[9],{204:function(e,t,a){"use strict";a.r(t);var n=a(0),r=a.n(n),c=a(123),s=a(125),i=a(124),o=a(113),u=a(105),g=a(107),l=a(17),p=a(43);t.default=Object(o.a)((function(){var e=Object(l.c)(p.c),t=Object(i.a)("https://newsapi.org/v2/top-headlines?country=us");return Object(u.a)("Trending"),e?r.a.createElement(g.a,null):r.a.createElement(c.a,{title:"Trending"},r.a.createElement(s.a,{sources:t}))}))}}]);
-//# sourceMappingURL=9.284c25cd.chunk.js.map
