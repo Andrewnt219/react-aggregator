@@ -5,7 +5,6 @@ import Layout from './hoc/Layout';
 import { useDispatch } from 'react-redux';
 import { checkToken } from 'features/authSlice';
 import ProtectedRoute from 'components/Auth/ProtectedRoute/ProtectedRoute';
-
 const Webdev = React.lazy(() => import('./containers/Webdev/Webdev'));
 const Trending = React.lazy(() => import('./containers/Trending/Trending'));
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));

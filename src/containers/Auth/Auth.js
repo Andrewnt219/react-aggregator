@@ -6,6 +6,7 @@ import { auth, selectIsLoggedIn, selectIsLoading, setIsLoading } from 'features/
 import LoginForm from "components/Auth/LoginForm/LoginForm";
 import classes from './Auth.module.scss'
 import { Redirect } from "react-router-dom";
+import useTitle from "hooks/useTitle";
 
 
 function Auth(props) {
@@ -13,6 +14,8 @@ function Auth(props) {
     const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(true);
     const isLoading = useSelector(selectIsLoading);
+
+    useTitle(isLogin ? 'Login' : 'Signup');
 
     function onSubmit(data) {
         data = { ...data, displayName: data.displayName ? data.displayName : data.firstName + ' ' + data.lastName };
