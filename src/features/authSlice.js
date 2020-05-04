@@ -85,17 +85,16 @@ async function sendLoginRequest(dispatch, email, password, displayName, rest) {
 
 async function sendSignupRequest(email, password, dispatch, displayName, rest) {
     const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE}`;
-    let signUpRes = await createAccountInAuth(rest, SIGNUP_URL, email, password, displayName);
+    let signUpRes = await createAccountInAuth(SIGNUP_URL, email, password, displayName);
     const userData = { ...signUpRes.data, ...rest };
 
-    const postRes = await createAccountInDB(signUpRes, rest, email);
+    const postRes = await createAccountInDB(signUpRes, rest, email, displayName);
 
     dispatch(setToken({ data: {...userData, id: postRes.data.name} }));
 }
 
-async function createAccountInDB(res, rest, email) {
+async function createAccountInDB(res, rest, email, displayName) {
     const userId = res.data.localId;
-    const displayName = rest.firstName + ' ' + rest.lastName;
 
     res = await axios.post('/users.json', {
         ...rest,
@@ -106,14 +105,8 @@ async function createAccountInDB(res, rest, email) {
     return res;
 }
 
-async function createAccountInAuth(rest, SIGNUP_URL, email, password) {
-    const { lastName, firstName } = rest;
-    let displayName;
-    if (!firstName && !lastName)
-        displayName = 'User';
-    else
-        displayName = firstName + ' ' + lastName;
-    let res = await axios.post(SIGNUP_URL, { email, password, displayName: displayName });
+async function createAccountInAuth(SIGNUP_URL, email, password, displayName) {
+    let res = await axios.post(SIGNUP_URL, { email, password, displayName });
     return res;
 }
 

@@ -15,13 +15,14 @@ function Auth() {
     const isLoading = useSelector(selectIsLoading);
 
     function onSubmit(data) {
-        dispatch(setIsLoading({isLoading: true}));
+        data = { ...data, displayName: data.displayName ? data.displayName : data.firstName + ' ' + data.lastName };
+        dispatch(setIsLoading({ isLoading: true }));
         dispatch(auth({ data, isLogin }));
     }
 
     let form = (
         <>
-            <LoginForm onSubmit={onSubmit} isLoading={isLoading}  />
+            <LoginForm onSubmit={onSubmit} isLoading={isLoading} />
             <div className={classes.switchContainer}>
                 <span style={{ color: '#bbb' }}>New to Aggregator? </span>
                 <span onClick={() => setIsLogin(false)}>Create an account</span>
