@@ -13,7 +13,7 @@ function Bookmarks() {
 
     if (!isLoading) {
         render = bookmarks.length === 0
-            ? <p>You have 0 bookmark</p>
+            ? <h3 style={{textAlign: 'center'}}>You have 0 bookmark</h3>
             : <NewsSource name="Bookmarks" articles={bookmarks} />
     }
 
