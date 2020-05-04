@@ -1,7 +1,7 @@
 @import 'variable.scss';
 
 .Modal {
-    overflow: scroll;
+    overflow: auto;
     width: max-content;
     max-width: 70vw;
     height: max-content;

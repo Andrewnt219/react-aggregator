@@ -8,7 +8,7 @@ import classes from './Auth.module.scss'
 import { Redirect } from "react-router-dom";
 
 
-function Auth() {
+function Auth(props) {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(true);
@@ -20,6 +20,8 @@ function Auth() {
         dispatch(auth({ data, isLogin }));
     }
 
+    const {from} = props.location.state || {from: {pathname: "account/me"}}
+    console.log(from);
     let form = (
         <>
             <LoginForm onSubmit={onSubmit} isLoading={isLoading} />
@@ -44,7 +46,7 @@ function Auth() {
         )
     }
 
-    return isLoggedIn ? <Redirect to="/account/me" /> : form
+    return isLoggedIn ? <Redirect to={from.pathname} /> : form
 
 }
 
