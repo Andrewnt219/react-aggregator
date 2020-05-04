@@ -1,0 +1,1 @@
+{"version":3,"sources":["Button.module.scss"],"names":[],"mappings":"AAAA,sBACI,yBAAkB,CAAlB,sBAAkB,CAAlB,iBAAkB,CAClB,4BAA6B,CAC7B,cAAe,CACf,eAAiB,CACjB,QAAS","file":"8.7350e9e5.chunk.css","sourcesContent":[".Button {\r\n    width: max-content;\r\n    background-color: transparent;\r\n    cursor: pointer;\r\n    font-weight: bold;\r\n    border: 0;\r\n}"]}
