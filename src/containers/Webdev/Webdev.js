@@ -11,7 +11,9 @@ import Spinner from 'components/ui/Spinner/Spinner';
 const URLS = [
     'https://newsapi.org/v2/everything?domains=theverge.com',
     'https://newsapi.org/v2/everything?domains=medium.com',
-    'https://newsapi.org/v2/everything?domains=smashingmagazine.com'
+    'https://newsapi.org/v2/everything?domains=smashingmagazine.com',
+    'https://newsapi.org/v2/everything?domains=css-tricks.com',
+    
 ]
 const TITLE = 'Web Development';
 
