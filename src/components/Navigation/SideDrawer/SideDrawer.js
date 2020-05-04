@@ -22,8 +22,10 @@ function SideDrawer({ show, setShow }) {
                     <Background src={background} />
                     <Logo showTitle width="15%" height="auto" />
                     <NavigationItems>
-                        <NavigationItem active={active}  to="/" exact>Trending</NavigationItem>
-                        <NavigationItem active={active}  to="/web-dev">Web development</NavigationItem>
+                        <NavigationItem active={active} to="/" exact>Trending</NavigationItem>
+                        <NavigationItem active={active} to="/tech">Web development</NavigationItem>
+                        <NavigationItem active={active} to="/bookmarks" exact >Bookmark</NavigationItem>
+                        <NavigationItem active={active} to="/account" >Account</NavigationItem>
                     </NavigationItems>
                 </motion.div>
             )}

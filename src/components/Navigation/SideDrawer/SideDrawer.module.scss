@@ -15,10 +15,10 @@ $sideBar-w: 70%;
     flex-direction: column;
 
     ul {
-        margin-left: 2rem;
+        margin-left: 1.5rem;
         margin-top: 1rem;
         display: grid;
-        row-gap: 1.5rem;
+        row-gap: 1rem;
         font-size: 1.5rem;
         font-weight: bolder;
 
@@ -26,19 +26,23 @@ $sideBar-w: 70%;
             max-height: 2.5rem;
 
             a {
-                margin-left: 1rem;
+                margin-left: 0.5rem;
                 color: #ccc;
                 width: 15rem;
-                padding: 0.5rem 0;
+                padding: 0.5rem;
+                width: max-content;
                 border-radius: 1rem;
                 transition: all 200ms ease;
-                width: 100%;
-                &.active,
+                font-size: 1.15rem;
+
                 &:hover {
+                    color: pink;
+                }
+
+                &.active {
                     color: $red;
                 }
             }
         }
     }
 }
-

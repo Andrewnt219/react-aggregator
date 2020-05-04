@@ -21,7 +21,7 @@ function Auth(props) {
     }
 
     const {from} = props.location.state || {from: {pathname: "account/me"}}
-    console.log(from);
+
     let form = (
         <>
             <LoginForm onSubmit={onSubmit} isLoading={isLoading} />

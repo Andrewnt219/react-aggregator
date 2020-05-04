@@ -12,7 +12,7 @@ function Footbar() {
         <footer className={classes.Footbar}>
 
             <NavigationItem active={active} to="/" exact src={trend}>Trending</NavigationItem>
-            <NavigationItem active={active} to="/web-dev" src={code}>Code</NavigationItem>
+            <NavigationItem active={active} to="/tech" src={code}>Tech</NavigationItem>
             <NavigationItem active={active} to="/bookmarks" exact src={bookmark}>Bookmark</NavigationItem>
             <NavigationItem active={active} to="/account" src={account}>Account</NavigationItem>
 

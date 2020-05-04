@@ -26,7 +26,7 @@ function App() {
           <ProtectedRoute path="/account/me" component={User} />
           <ProtectedRoute path="/bookmarks" component={Bookmarks} />
 
-          <Route path="/web-dev" component={Webdev} />
+          <Route path="/tech" component={Webdev} />
           <Route path="/account" component={Auth} />
           <Route path="/" exact component={Trending} />
           <Route component={Empty} />
