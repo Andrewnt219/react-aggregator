@@ -10,10 +10,9 @@ function AvatarSelection({ id, setShowAvatarSelection }) {
     return (
         <div
             className={classes.AvatarSelection}
-            onClick={() => setShowAvatarSelection(false)}
         >
-            <AvatarCategory id={id} imgSource={bachVien} name="Bach Vien" />
-            <AvatarCategory id={id} imgSource={cats} name="Cats" />
+            <AvatarCategory setShowAvatarSelection={setShowAvatarSelection} id={id} imgSource={bachVien} name="Bach Vien" />
+            <AvatarCategory setShowAvatarSelection={setShowAvatarSelection} id={id} imgSource={cats} name="Cats" />
         </div>
     )
 }

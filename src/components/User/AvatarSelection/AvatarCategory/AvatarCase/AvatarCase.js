@@ -3,12 +3,15 @@ import { useDispatch } from 'react-redux';
 import { updateUserProfile } from 'features/authSlice';
 import classes from './AvatarCase.module.scss'
 
-function AvatarCase({ id, avatarSrc }) {
+function AvatarCase({ id, avatarSrc, setShowAvatarSelection }) {
     const dispatch = useDispatch();
 
     return <img
         className={classes.AvatarCase}
-        onClick={() => { dispatch(updateUserProfile(id, { avatar: avatarSrc })) }}
+        onClick={() => {
+            setShowAvatarSelection(false);
+            dispatch(updateUserProfile(id, { avatar: avatarSrc }))
+        }}
         src={avatarSrc}
         alt="avatar" />
 }
