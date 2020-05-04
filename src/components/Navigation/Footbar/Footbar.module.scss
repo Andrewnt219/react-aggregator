@@ -9,7 +9,7 @@
     box-shadow: -2px 0 5px #eee;
     width: 100%;
     z-index: 999;
-    display: grid;
+    display: none;
     grid-template-columns: repeat(4, 1fr);
 
     li {
@@ -36,5 +36,11 @@
                 font-weight: bold;
             }
         }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .Footbar {
+        display: grid;
     }
 }

@@ -4,6 +4,7 @@ import SideDrawer from 'components/Navigation/SideDrawer/SideDrawer'
 import Backdrop from 'components/ui/Backdrop/Backdrop'
 import classes from './Layout.module.scss'
 import Footbar from 'components/Navigation/Footbar/Footbar'
+import HamburgerMenu from 'components/ui/HamburgerMenu/HamburgerMenu'
 
 // waiting for toolbar, hamburgerMenu
 function Layout(props) {
@@ -11,9 +12,10 @@ function Layout(props) {
 
     return (
         <>
+            <HamburgerMenu setShow={setShowSideDrawer} show={showSideDrawer} />
             <Backdrop show={showSideDrawer} setShow={setShowSideDrawer} />
             <SideDrawer show={showSideDrawer} setShow={setShowSideDrawer} />
-            <Toolbar hamMenuClicked={setShowSideDrawer} />
+            <Toolbar />
             <Footbar />
             <main className={classes.main}>
                 {props.children}

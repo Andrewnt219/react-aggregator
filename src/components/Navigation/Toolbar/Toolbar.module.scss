@@ -2,7 +2,7 @@
 
 .Toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,16 +25,18 @@
         color: $white;
 
     }
-}
 
-.nav {
-    display: none;
+    img {
+        display: none;
+    }
 }
 
 
 
 @media screen and (min-width: 768px) {
-    .nav {
-        display: block;
+    .Toolbar {
+        img {
+            display: inline-block;
+        }
     }
 }
