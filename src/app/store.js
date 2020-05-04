@@ -7,6 +7,7 @@ import bookmarkReducer from 'features/bookmarkSlice'
 import contactUsReducer from 'features/contactUsSlice'
 
 export default configureStore({
+  devTools: process.env.NODE_ENV !== 'production',
   reducer: {
     counter: counterReducer,
     news: newsReducer,
