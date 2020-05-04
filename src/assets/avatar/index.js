@@ -62,7 +62,10 @@ import Spring from './Care_spring.png'
 import VICTS from './Care_VICTS.png'
 import CSharp from './Care_CSharp.png'
 import Cap from './Care_Cap.png'
-
+import LiterBug from './Care_LiterBug.png'
+import Hello from './Care_Hello.png'
+import CPP from './Care_CPP.png'
+import Bugs from './Care_Bugs.png'
 
 const avatar = [
     cat1,
@@ -127,6 +130,10 @@ const avatar = [
     Spring,
     VICTS,
     CSharp,
+    CPP,
+    Hello,
+    LiterBug,
+    Bugs,
     Cap
 ]
 
