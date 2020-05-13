@@ -4,6 +4,16 @@ Special thanks to [NewsApi](https://newsapi.org/) for their amazing API.
 
 Project is hosted on Heroku at https://react-aggregator.herokuapp.com/
 
+
+
+**Dummy**
+
+phong.nguyentuan00@gmail.com
+
+Abcd@1234
+
+
+
 ## Libraries & Frameworks
 
 ### `React`
