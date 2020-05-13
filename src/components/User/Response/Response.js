@@ -49,7 +49,7 @@ function Response({ id, subject, message, isResolved, issuedDate, resolvedMessag
                     dispatch(revokeResponse(id));
                 }}
             >
-                REVOKE
+                DELETE
             </button>
         </div>
     )

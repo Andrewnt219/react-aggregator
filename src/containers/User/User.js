@@ -38,9 +38,9 @@ function User() {
         dispatch(storeUserResponse({ ...data, isResolved: false, resolvedMessage: "", issuedDate: new Date() }));
     }
 
-    let profile = <Spinner />
-    if (!isLoading) {
-        profile = (
+    // let profile = <Spinner />
+    // if (!isLoading) {
+        const profile = (
             <div className={classes.User}>
                 <Card >
                     <Avatar
@@ -102,7 +102,7 @@ function User() {
                 <Button clicked={() => dispatch(logout())}>LOG OUT</Button>
             </div>
         )
-    }
+    // }
 
     return profile;
 }
