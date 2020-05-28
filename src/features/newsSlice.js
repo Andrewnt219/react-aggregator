@@ -46,6 +46,15 @@ export const { populateSources, setIsLoading } = newsSlice.actions;
 // fetch articles from a given array of domain(s)
 export const fetchSources = ({ bookmarks, url }) => async (dispatch) => {
   const fetchDataFromAPI = async function () {
+    axios.interceptors.response.use(
+      (response) => {
+        console.log('newsapi response');
+        response.headers['Access-Control-Allow-Origin'] = '*';
+        return response;
+      },
+      (error) => Promise.reject(error)
+    );
+
     const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
     let res,
       articles = [];
