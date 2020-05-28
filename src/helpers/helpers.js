@@ -35,8 +35,7 @@ export const asyncDispatchWrapper = async function (
     }
     switch (errorMessage.toUpperCase()) {
       case 'NETWORK ERROR':
-        errorMessage =
-          'This project currently has CORS error with NewsAPI, more research is needed';
+        errorMessage = 'Check your connection';
         break;
       case 'EMAIL_EXISTS':
         errorMessage = 'Email exists! Try signing in';
