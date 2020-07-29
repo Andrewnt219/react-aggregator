@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import Spinner from 'components/ui/Spinner/Spinner';
 
 const URLS = [
-  '/everything?domains=theverge.com',
   '/everything?domains=medium.com',
   '/everything?domains=smashingmagazine.com',
   '/everything?domains=css-tricks.com',

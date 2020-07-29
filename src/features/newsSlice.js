@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import axios from 'newsApi';
-import { asyncDispatchWrapper } from 'helpers/helpers';
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "newsApi";
+import { asyncDispatchWrapper } from "helpers/helpers";
+import instance from "newsApi";
 
 const newsSlice = createSlice({
-  name: 'news',
+  name: "news",
   initialState: {
     sources: {},
     isLoading: true,
@@ -46,27 +47,18 @@ export const { populateSources, setIsLoading } = newsSlice.actions;
 // fetch articles from a given array of domain(s)
 export const fetchSources = ({ bookmarks, url }) => async (dispatch) => {
   const fetchDataFromAPI = async function () {
-    axios.interceptors.response.use(
-      (response) => {
-        console.log('newsapi response');
-        response.headers['Access-Control-Allow-Origin'] = '*';
-        return response;
-      },
-      (error) => Promise.reject(error)
-    );
-
-    const appendedApiQuery = '&apiKey=' + process.env.REACT_APP_NEWS_API;
+    const appendedApiQuery = "&apiKey=" + process.env.REACT_APP_NEWS_API;
     let res,
       articles = [];
 
-    if (url.includes('>>')) {
-      const urls = url.split('>>');
+    if (url.includes(">>")) {
+      const urls = url.split(">>");
       for (const u of urls) {
-        res = await axios.get(u + appendedApiQuery);
+        res = await instance.get(u + appendedApiQuery);
         articles.push(...res.data.articles);
       }
     } else {
-      res = await axios.get(url + appendedApiQuery);
+      res = await instance.get(url + appendedApiQuery);
       articles = res.data.articles;
     }
 
