@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const instance = Axios.create({
-  baseURL: "https://newsapi.org/v2/",
+  baseURL: "https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/",
 });
 
 instance.interceptors.response.use(
