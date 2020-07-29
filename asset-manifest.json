@@ -3,8 +3,8 @@
     "static/js/0.503bea38.chunk.js": "/react-aggregator/static/js/0.503bea38.chunk.js",
     "static/js/0.503bea38.chunk.js.map": "/react-aggregator/static/js/0.503bea38.chunk.js.map",
     "main.css": "/react-aggregator/static/css/main.9ca4a658.chunk.css",
-    "main.js": "/react-aggregator/static/js/main.dabe5459.chunk.js",
-    "main.js.map": "/react-aggregator/static/js/main.dabe5459.chunk.js.map",
+    "main.js": "/react-aggregator/static/js/main.2ec832cf.chunk.js",
+    "main.js.map": "/react-aggregator/static/js/main.2ec832cf.chunk.js.map",
     "runtime-main.js": "/react-aggregator/static/js/runtime-main.14149d57.js",
     "runtime-main.js.map": "/react-aggregator/static/js/runtime-main.14149d57.js.map",
     "static/css/3.0afcb795.chunk.css": "/react-aggregator/static/css/3.0afcb795.chunk.css",
@@ -28,7 +28,7 @@
     "static/js/9.a36a740b.chunk.js": "/react-aggregator/static/js/9.a36a740b.chunk.js",
     "static/js/9.a36a740b.chunk.js.map": "/react-aggregator/static/js/9.a36a740b.chunk.js.map",
     "index.html": "/react-aggregator/index.html",
-    "precache-manifest.f602316110bef05608b369b803f01e8b.js": "/react-aggregator/precache-manifest.f602316110bef05608b369b803f01e8b.js",
+    "precache-manifest.42731f673391fdc89e7fa985f80a5271.js": "/react-aggregator/precache-manifest.42731f673391fdc89e7fa985f80a5271.js",
     "service-worker.js": "/react-aggregator/service-worker.js",
     "static/css/3.0afcb795.chunk.css.map": "/react-aggregator/static/css/3.0afcb795.chunk.css.map",
     "static/css/5.233815f8.chunk.css.map": "/react-aggregator/static/css/5.233815f8.chunk.css.map",
@@ -115,6 +115,6 @@
     "static/js/runtime-main.14149d57.js",
     "static/js/4.521b64dd.chunk.js",
     "static/css/main.9ca4a658.chunk.css",
-    "static/js/main.dabe5459.chunk.js"
+    "static/js/main.2ec832cf.chunk.js"
   ]
 }
